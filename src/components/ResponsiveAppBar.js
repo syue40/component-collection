@@ -9,12 +9,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "Tables", "Charts"];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -31,7 +30,7 @@ function ResponsiveAppBar() {
     <AppBar position="static" sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <LocalLibraryIcon
+          <AccountBalanceIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
           <Typography
@@ -94,7 +93,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <LocalLibraryIcon
+          <AccountBalanceIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
           />
           <Typography
