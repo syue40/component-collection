@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -28,10 +28,12 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor: 'black'}}>
+    <AppBar position="static" sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <LocalLibraryIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <LocalLibraryIcon
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -81,7 +83,10 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <NavLink to={page.toLowerCase()} style={{ textDecoration: 'none', color:'black' }}>
+                <NavLink
+                  to={page.toLowerCase()}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
@@ -89,7 +94,9 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <LocalLibraryIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <LocalLibraryIcon
+            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -108,9 +115,12 @@ function ResponsiveAppBar() {
           >
             The Component Library
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" },  }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <NavLink to={page === "Home" ? "/" : page.toLowerCase()} style={{ textDecoration: 'none' }}>
+              <NavLink
+                to={page === "Home" ? "/" : page.toLowerCase()}
+                style={{ textDecoration: "none" }}
+              >
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
