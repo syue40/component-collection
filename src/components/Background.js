@@ -1,4 +1,4 @@
-import "../../styles/login.css";
+import "../styles/login.css";
 
 export function AnimatedBackground() {
   return (

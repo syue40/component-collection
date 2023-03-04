@@ -1,220 +1,406 @@
 import React, { useEffect, useState } from "react";
+
 import PropTypes from "prop-types";
-import DownloadCSV from "./DownloadCSV";
-import "../../styles/table.css";
-import "../../styles/index.css";
+import { alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import { visuallyHidden } from "@mui/utils";
 
-/**
- * Takes in an API endpoint on the backend as a string as a prop
- * ALso takes an array of headers as a prop
- */
-function Table(props) {
-  const [tableData, setTableData] = useState([]);
-  const [order, setOrder] = useState("0DSC");
+function createData(
+  country_code,
+  region_name,
+  sub_region_name,
+  intermediate_region,
+  country_name,
+  income_group,
+  year,
+  total_gdp,
+  total_gdp_million,
+  gdp_variation
+) {
+  return {
+    country_code,
+    region_name,
+    sub_region_name,
+    intermediate_region,
+    country_name,
+    income_group,
+    year,
+    total_gdp,
+    total_gdp_million,
+    gdp_variation,
+  };
+}
 
-  useEffect(() => {
-    let vals = props.data;
-    for (let i = 0; i < vals.length; i++) {
-      if (Array.isArray(vals[i])) {
-        for (let j = 0; j < vals[i].length; j++) {
-          if (vals[i][j] == "NaN") {
-            vals[i][j] = "-";
-          }
-        }
-      }
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
+// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
+// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
+// with exampleArray.slice().sort(exampleComparator)
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) {
+      return order;
     }
-    setTableData(props.data);
-  }, [props.data]);
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
 
-  const parseCSV = (tableData) => {
-    return tableData.map((row) => row);
+const headCells = [
+  {
+    id: "country_code",
+    numeric: false,
+    disablePadding: false,
+    label: "Country Code",
+  },
+  {
+    id: "region_name",
+    numeric: false,
+    disablePadding: false,
+    label: "Region Name",
+  },
+  {
+    id: "sub_region_name",
+    numeric: false,
+    disablePadding: false,
+    label: "Sub-region Name",
+  },
+  {
+    id: "intermediate_region",
+    numeric: false,
+    disablePadding: false,
+    label: "Intermediate Region",
+  },
+  {
+    id: "country_name",
+    numeric: false,
+    disablePadding: false,
+    label: "Name",
+  },
+  {
+    id: "income_group",
+    numeric: false,
+    disablePadding: false,
+    label: "Income Group",
+  },
+  {
+    id: "year",
+    numeric: true,
+    disablePadding: false,
+    label: "Year",
+  },
+  {
+    id: "total_gdp",
+    numeric: true,
+    disablePadding: false,
+    label: "Total GDP",
+  },
+  {
+    id: "total_gdp_million",
+    numeric: true,
+    disablePadding: false,
+    label: "Total GDP (millions)",
+  },
+  {
+    id: "gdp_variation",
+    numeric: true,
+    disablePadding: false,
+    label: "GDP Variation",
+  },
+];
+
+function EnhancedTableHead(props) {
+  const {
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
   };
 
-  //generate the table data to columns
-  const generateTableData = () => {
-    return tableData.map((building) => (
-      <tr key={building[0]} className="row">
-        {building.map((data, index) => {
-          if (props.skipRows === false) {
-            if (!isNaN(data)) {
-              if (props.addLocale === true) {
-                return (
-                  <td
-                    key={index}
-                    className="columnItem font-mukta align-middle"
-                  >
-                    {parseFloat(data).toLocaleString("en-us")}
-                  </td>
-                );
-              } else {
-                return (
-                  <td
-                    key={index}
-                    className="columnItem font-mukta align-middle"
-                  >
-                    {data}
-                  </td>
-                );
-              }
-            } else {
-              return (
-                <td key={index} className="columnItem font-mukta align-middle">
-                  {data}
-                </td>
-              );
-            }
-          } else {
-            if (index !== 0) {
-              if (!isNaN(data)) {
-                if (props.addLocale === true) {
-                  return (
-                    <td
-                      key={index}
-                      className="columnItem font-mukta align-middle"
-                    >
-                      {parseFloat(data).toLocaleString("en-US")}
-                    </td>
-                  );
-                } else {
-                  return (
-                    <td
-                      key={index}
-                      className="columnItem font-mukta align-middle"
-                    >
-                      {data}
-                    </td>
-                  );
-                }
-              } else {
-                return (
-                  <td
-                    key={index}
-                    className="columnItem font-mukta align-middle"
-                  >
-                    {data}
-                  </td>
-                );
-              }
-            }
-          }
-        })}
-      </tr>
-    ));
-  };
-
-  //sort by columns function, takes column index and state to determine which column to sort
-  const sorting = (col) => {
-    if (props.skipRows === false) {
-      if (order.substring(1) === "ASC") {
-        const sorted = [...tableData].sort((a, b) =>
-          a[col].localeCompare(b[col], "en", {
-            numeric: true,
-            sensitivity: "base",
-          })
-        );
-        setTableData(sorted);
-        setOrder(col + "DSC");
-      }
-
-      if (order.substring(1) === "DSC") {
-        const sorted = [...tableData].sort((a, b) =>
-          b[col].localeCompare(a[col], "en", {
-            numeric: true,
-            sensitivity: "base",
-          })
-        );
-        setTableData(sorted);
-        setOrder(col + "ASC");
-      }
-    } else {
-      col = col + 1;
-      if (order.substring(1) === "ASC") {
-        const sorted = [...tableData].sort((a, b) =>
-          a[col].localeCompare(b[col], "en", {
-            numeric: true,
-            sensitivity: "base",
-          })
-        );
-        setTableData(sorted);
-        setOrder(col - 1 + "DSC");
-      }
-
-      if (order.substring(1) === "DSC") {
-        const sorted = [...tableData].sort((a, b) =>
-          b[col].localeCompare(a[col], "en", {
-            numeric: true,
-            sensitivity: "base",
-          })
-        );
-        setTableData(sorted);
-        setOrder(col - 1 + "ASC");
-      }
-    }
-  };
   return (
-    <div className="overflow-y-scroll h-full">
-      <table id="portfolio" className="rounded-lg text-sm w-full table">
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-          rel="stylesheet"
-        />
-        <thead>
-          <tr>
-            <th colSpan={"100%"} className="table-title">
-              <div className="flex justify-between items-center font-mukta">
-                <p className="">{props.title}</p>
-                <DownloadCSV
-                  headers={props.id_col ? ["identifier"].concat(props.headers) : props.headers}
-                  data={parseCSV(tableData)}
-                  filename={props.filename}
-                />
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <thead>
-          <tr>
-            {props.headers.map((value, index) => {
-              if (order === index + "ASC") {
-                return (
-                  <th key={index} className="sticky top-0 ">
-                    <div className="flex justify-between items-center font-mukta">
-                      {value}
-                      <span
-                        className="material-symbols-outlined"
-                        onClick={() => sorting(index)}
-                      >
-                        expand_more
-                      </span>
-                    </div>
-                  </th>
-                );
-              }
-              return (
-                <th className="sticky top-0" key={index}>
-                  <div className="flex justify-between items-center font-mukta ">
-                    {value}
-                    <span
-                      className="material-symbols-outlined"
-                      onClick={() => sorting(index)}
-                    >
-                      expand_less
-                    </span>
-                  </div>
-                </th>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody className="mt-12">{generateTableData()}</tbody>
-      </table>
-    </div>
+    <TableHead>
+      <TableRow>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            align={"center"}
+            padding={headCell.disablePadding ? "none" : "normal"}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : "asc"}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <Box component="span" sx={visuallyHidden}>
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
+                </Box>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
   );
 }
 
-Table.propTypes = {
-  data: PropTypes.array.isRequired,
-  headers: PropTypes.array.isRequired,
+EnhancedTableHead.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
 };
 
-export default Table;
+function EnhancedTableToolbar(props) {
+  const { numSelected } = props;
+
+  return (
+    <Toolbar
+      sx={{
+        pl: { sm: 2 },
+        pr: { xs: 1, sm: 1 },
+        ...(numSelected > 0 && {
+          bgcolor: (theme) =>
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
+        }),
+      }}
+    >
+      {numSelected > 0 ? (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
+          {numSelected} selected
+        </Typography>
+      ) : (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          GDP Data
+        </Typography>
+      )}
+    </Toolbar>
+  );
+}
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+};
+
+export default function EnhancedTable(props) {
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("calories");
+  const [selected, setSelected] = React.useState([]);
+  const [page, setPage] = React.useState(0);
+  const [dense, setDense] = React.useState(false);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([])
+
+  useEffect(() => {
+    /* on load, turn on spinner awaiting getData response, then turn off spinner when data is set */
+    // setIsLoading(true);
+    
+    if (props.data) {
+      let tempRows = []
+      for (let i = 1; i < (props.data).length -1; i++) {
+        tempRows.push(createData(
+          props.data[i][0],
+          props.data[i][1],
+          props.data[i][2],
+          props.data[i][3],
+          props.data[i][4],
+          props.data[i][5],
+          props.data[i][6],
+          props.data[i][7],
+          props.data[i][8],
+          props.data[i][9]
+        ))
+      }
+      setRows(tempRows)
+      // setIsLoading(false);
+    }
+  }, []);
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelected = rows.map((n) => n.name);
+      setSelected(newSelected);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelected(newSelected);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
+
+  const isSelected = (name) => selected.indexOf(name) !== -1;
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+  return (
+    <Box sx={{ width: "100%" }} >
+      <div className="shadow-xl">
+      <Paper sx={{ width: "100%", mb: 2 }}>
+        <EnhancedTableToolbar numSelected={selected.length} />
+        <TableContainer >
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? "small" : "medium"} 
+          >
+            <EnhancedTableHead
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={rows.length}
+            />
+            <TableBody >
+              {stableSort(rows, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  const isItemSelected = isSelected(row.name);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
+                  return (
+                    <TableRow
+                      hover
+                      // onClick={(event) => handleClick(event, row.name)}
+                      tabIndex={-1}
+                      key={row.name}
+                      // selected={isItemSelected}
+                    >
+                      <TableCell align="center">{row.country_code}</TableCell>
+                      <TableCell align="center">{row.region_name}</TableCell>
+                      <TableCell align="center">{row.sub_region_name}</TableCell>
+                      <TableCell align="center">{row.intermediate_region}</TableCell>
+                      <TableCell align="center">{row.country_name}</TableCell>
+                      <TableCell align="center">{row.income_group}</TableCell>
+                      <TableCell align="center">{row.year}</TableCell>
+                      <TableCell align="center">{row.total_gdp}</TableCell>
+                      <TableCell align="center">{row.total_gdp_million}</TableCell>
+                      <TableCell align="center">{row.gdp_variation}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              {emptyRows > 0 && (
+                <TableRow
+                  style={{
+                    height: (dense ? 33 : 53) * emptyRows,
+                  }}
+                >
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+      </div>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense padding"
+      />
+    </Box>
+  );
+}
