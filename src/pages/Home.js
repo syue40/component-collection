@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import library from "../images/library.png";
-
+import {RandomQuoteGenerator} from "../components/RandomQuoteGenerator"
 export const Home = (props) => {
   return (
     <div>
@@ -15,7 +15,8 @@ export const Home = (props) => {
               class="shadow-lg border"
             />
             <div class="flex justify-center col-span-1 p-2 m-1 ">
-              <p>asdf</p>
+              <RandomQuoteGenerator></RandomQuoteGenerator>
+              {/* <p>asdf</p> */}
             </div>
           </div>
         </div>

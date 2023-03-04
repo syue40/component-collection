@@ -43,11 +43,13 @@ function App() {
         <div>
           <AnimatedBackground />
           <ResponsiveAppBar />
+          <div class="ml-10 mr-10">
           <Routes>
             <Route path="/" element={<Home  />} />
             <Route path="/tables" element={<Tables data={data}/>} />
             <Route path="/charts" element={<Charts />} />
           </Routes>
+          </div>
         </div>
       </body>
     </div>
