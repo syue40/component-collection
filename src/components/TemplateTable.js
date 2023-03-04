@@ -14,13 +14,8 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
 function createData(
@@ -65,10 +60,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -146,11 +137,8 @@ const headCells = [
 
 function EnhancedTableHead(props) {
   const {
-    onSelectAllClick,
     order,
     orderBy,
-    numSelected,
-    rowCount,
     onRequestSort,
   } = props;
   const createSortHandler = (property) => (event) => {
@@ -228,7 +216,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          GDP Data
+          World GDP Historical Data
         </Typography>
       )}
     </Toolbar>
@@ -249,9 +237,6 @@ export default function EnhancedTable(props) {
   const [rows, setRows] = React.useState([])
 
   useEffect(() => {
-    /* on load, turn on spinner awaiting getData response, then turn off spinner when data is set */
-    // setIsLoading(true);
-    
     if (props.data) {
       let tempRows = []
       for (let i = 1; i < (props.data).length -1; i++) {
@@ -269,7 +254,6 @@ export default function EnhancedTable(props) {
         ))
       }
       setRows(tempRows)
-      // setIsLoading(false);
     }
   }, []);
 
@@ -288,26 +272,6 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -320,8 +284,6 @@ export default function EnhancedTable(props) {
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -350,16 +312,11 @@ export default function EnhancedTable(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover
-                      // onClick={(event) => handleClick(event, row.name)}
                       tabIndex={-1}
                       key={row.name}
-                      // selected={isItemSelected}
                     >
                       <TableCell align="center">{row.country_code}</TableCell>
                       <TableCell align="center">{row.region_name}</TableCell>
@@ -377,7 +334,7 @@ export default function EnhancedTable(props) {
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: (dense ? 43 : 50) * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />

@@ -14,11 +14,11 @@
 
 .bg2 {
   animation-direction: alternate-reverse;
-  animation-duration: 125s;
+  animation-duration: 100s;
 }
 
 .bg3 {
-  animation-duration: 175s;
+  animation-duration: 125s;
 }
 
 /* Add a right margin to each icon */

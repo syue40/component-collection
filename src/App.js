@@ -44,8 +44,8 @@ function App() {
           <AnimatedBackground />
           <ResponsiveAppBar />
           <Routes>
-            <Route path="/" element={<Home data={data} />} />
-            <Route path="/tables" element={<Tables />} />
+            <Route path="/" element={<Home  />} />
+            <Route path="/tables" element={<Tables data={data}/>} />
             <Route path="/charts" element={<Charts />} />
           </Routes>
         </div>
