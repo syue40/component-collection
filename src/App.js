@@ -56,7 +56,7 @@ function App() {
         <div>
           <AnimatedBackground />
           <ResponsiveAppBar />
-          <div class="ml-10 mr-10">
+          <div class="lg:ml-10 lg:mr-10 md:ml-8 md:mr-8 sm:ml-2 sm:mr-2">
           <Routes>
             <Route path="/" element={<Home  />} />
             <Route path="/tables" element={<Tables data={data} apiData={apiData}/>} />
