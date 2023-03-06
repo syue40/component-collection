@@ -27,13 +27,22 @@ export const Tables = (props) => {
 
   return (
     <div>
-      <div className="ml-8 mr-8 pl-5 pr-5 mt-3">
+      <div class="mt-8 ml-8 mr-8 pl-5 pr-5 mt-3">
         {props.data.length > 0 ? <TemplateTable data={props.data} /> : ""}
       </div>
-      <div className="ml-8 mr-8 pl-5 pr-5 mt-3">
-        <div className="rounded-lg bg-white shadow-lg border pl-10 pr-10 pt-10 pb-5">
+      <div class="ml-8 mr-8 pl-5 pr-5 mt-3">
+        <div class="grid grid-cols-3 sm:grid-cols md:grid-cols-2 lg:grid-cols-3 gap-8">
+           <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border p-5 mb-10">
             {props.data.length > 0 ? <PieChart data={pieCountriesData}/>: ""}
+            </div>
+            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border p-5 mb-10">
+                {props.data.length > 0 ? <PieChart data={pieCountriesData}/>: ""}
+            </div> 
+            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border p-5 mb-10">
+                {props.data.length > 0 ? <PieChart data={pieCountriesData}/>: ""}
+            </div> 
         </div>
+        
         
       </div>
     </div>

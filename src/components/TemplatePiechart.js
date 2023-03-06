@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const PieChart = (props) => {
@@ -74,33 +74,36 @@ const PieChart = (props) => {
 
   
   return (
-    <div className="h-96">
-      <div className="h-full w-full flex flex-col">
-          <Pie
+    <div className="lg:h-96 md:h-60 sm:h-42 lg:w-96 md:w-30 sm:w-18">
+      <div className="h-full w-full flex">
+          <Doughnut
             data={pieData}
-            plugins={[ChartDataLabels]}
+            // plugins={[ChartDataLabels]}
             options={{
               maintainAspectRatio: false,
               plugins: {
                 legend: {
                   display: true,
                   position: "bottom",
-                  // align: props.legendAlignment,
+                  align: "center",
                   labels: {
-                    padding: 10,
+                    fontSize: "2px",
+                    boxWidth: 12,
+                    boxHeight: 12,
+                    padding: 8,
                   },
                 },
-                datalabels: {
-                  align: "end",
-                  display: "auto",
-                  color: "#fff",
-                  formatter: (value, ctx) => {
-                    let datasets = ctx.chart.data.datasets;
-                    let sum = datasets[0].data.reduce((a, b) => a + b, 0);
-                    let percentage = Math.round((value / sum) * 100) + "%";
-                    return percentage;
-                  },
-                },
+                // datalabels: {
+                //   align: "end",
+                //   display: "auto",
+                //   color: "#fff",
+                //   formatter: (value, ctx) => {
+                //     let datasets = ctx.chart.data.datasets;
+                //     let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+                //     let percentage = Math.round((value / sum) * 100) + "%";
+                //     return percentage;
+                //   },
+                // },
               },
             }}
           />

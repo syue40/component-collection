@@ -8,6 +8,7 @@ import Papa from "papaparse";
 // import countries_gdp_hist from "./countries_gdp_hist.csv"
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import { AnimatedBackground } from "./components/Background";
+import { getApiData } from "./utils/httpClient";
 function App() {
   const [data, setData] = useState({});
   const [error, setError] = useState("");
@@ -16,6 +17,8 @@ function App() {
     const tempData = Papa.parse(await fetchCsv());
     return tempData.data;
   }
+
+
 
   async function fetchCsv() {
     const response = await fetch("./countries_gdp_hist.csv");
@@ -35,6 +38,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+    
+    getApiData("profile")
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }, []);
 
   return (
