@@ -9,6 +9,7 @@ import TemplateTable from "../components/TemplateTable";
 import PieChart from "../components/TemplatePiechart";
 import BarChart from "../components/BarChart";
 import { parseCountriesPieData } from "../utils/dataProcessor";
+import HistoricLineChart from "../components/HistoricLineChart";
 
 export const Tables = (props) => {
   const [data, setData] = useState({
@@ -26,7 +27,8 @@ export const Tables = (props) => {
       setData({
         active_customers: props.apiData.active_customers,
         genre_ratios: props.apiData.genre_ratios,
-        rentals_by_staff:  props.apiData.rentals_by_staff
+        rentals_by_staff: props.apiData.rentals_by_staff,
+        sales_data: props.apiData.sales_data
       });
     }
   }, [props]);
@@ -39,21 +41,40 @@ export const Tables = (props) => {
       <div class="ml-8 mr-8 pl-5 pr-5 mt-3">
         <div class="grid grid-cols place-content-center sm:grid-cols md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border p-5 mb-10">
-            <PieChart data={data.active_customers} title={"Ratio of Active Customers"}/>
+            <PieChart
+              data={data.active_customers}
+              title={"Ratio of Active Customers"}
+            />
           </div>
           <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border p-5 mb-10">
-            <PieChart data={data.genre_ratios} title={"Films In Stock by Genre"}/>
+            <PieChart
+              data={data.genre_ratios}
+              title={"Films In Stock by Genre"}
+            />
           </div>
           <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border p-5 mb-10">
-          <BarChart
-            data={data.rentals_by_staff}
-            title="Top Sales by Staff"
-            label="Rentals Done"
-            color="#ad4501"
-            yaxis="Count of Units Rented"
-          />
-            </div> 
+            <BarChart
+              data={data.rentals_by_staff}
+              title="Top Sales by Staff"
+              label="Rentals Done"
+              color="#ad4501"
+              yaxis="Count of Units Rented"
+            />
+          </div>
+          
         </div>
+        <div class="grid grid-cols place-content-center sm:grid-cols md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="flex justify-center col-span-2 rounded-lg bg-white shadow-lg border p-5 mb-10">
+            <HistoricLineChart 
+                  title="DVD Rental Store Sales Data"
+                  line_color="rgba(54, 215, 255, 0.8)"
+                  bar_color="rgba(182, 54, 255, 0.8)"
+                  y_label="Units Sold"
+                  legend_label="Value Generated"
+                  data={data.sales_data}/>
+          </div>
+        </div>
+        
       </div>
     </div>
   );

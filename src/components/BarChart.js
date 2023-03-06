@@ -35,18 +35,7 @@ const BarChart = (props) => {
 
   useEffect(() => {
     let res = props.data;
-    console.log(props);
     if (res) {
-      console.log(res);
-
-      // //push site name and cost/consumption from queried data to empty arrs
-      // res.forEach((obj) => {
-      //   data.push(parseFloat(obj[props.columns[1]]));
-      //   labels.push(String(obj[props.columns[0]]));
-      // });
-
-      //set data as queried data, set labels and chart color
-      // sortByValue(props.labels, props.data, temp_list);
       setData({
         labels: res.labels,
         datasets: [
@@ -73,7 +62,7 @@ const BarChart = (props) => {
       <div class="p-3">
         <h2 className="font-bold">{props.title}</h2>
       </div>
-      <div class="flex justify-center lg:h-96 lg:w-96 md:h-60 md:w-30 sm:h-42 sm:w-12">
+      <div class="flex justify-center lg:h-96 lg:w-96 md:h-60 md:w-60 sm:h-32 sm:w-32">
         <Bar
           data={data}
           options={{
