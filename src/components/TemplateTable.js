@@ -255,7 +255,7 @@ export default function EnhancedTable(props) {
       }
       setRows(tempRows)
     }
-  }, []);
+  }, [props]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";

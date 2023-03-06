@@ -49,16 +49,15 @@ const PieChart = (props) => {
         label: "Count",
         data: [],
         backgroundColor: generateRandomColor(10),
-      }
+      },
     ],
-    
   });
 
   // Call the back-end app for data table (an array of RealDictRow objects), the response.
   useEffect(() => {
     let res = props.data;
+
     if (res) {
-      // Set the data obtained from Back-end to the Pie Chart and assign random colour to pie slices
       setPieData({
         labels: res.labels,
         datasets: [
@@ -72,10 +71,13 @@ const PieChart = (props) => {
     }
   }, [props]);
 
-  
   return (
-    <div className="lg:h-96 md:h-60 sm:h-42 lg:w-96 md:w-30 sm:w-18">
-      <div className="h-full w-full flex">
+    <div>
+      <div class="p-3">
+        {props.title ? <h2 class="font-bold">{props.title}</h2> : ""}
+      </div>
+      <div class="lg:h-96 md:h-60 sm:h-42 lg:w-96 md:w-30 sm:w-18">
+        <div class="flex h-full w-full">
           <Doughnut
             data={pieData}
             // plugins={[ChartDataLabels]}
@@ -108,6 +110,7 @@ const PieChart = (props) => {
             }}
           />
         </div>
+      </div>
     </div>
   );
 };

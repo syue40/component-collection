@@ -11,6 +11,8 @@ import { AnimatedBackground } from "./components/Background";
 import { getApiData } from "./utils/httpClient";
 function App() {
   const [data, setData] = useState({});
+  const [apiData, setApiData] = useState({});
+
   const [error, setError] = useState("");
 
   async function getData() {
@@ -41,7 +43,7 @@ function App() {
     
     getApiData("profile")
     .then((res) => {
-      console.log(res)
+      setApiData(res.data)
     })
     .catch((err) => {
       console.log(err)
@@ -57,7 +59,7 @@ function App() {
           <div class="ml-10 mr-10">
           <Routes>
             <Route path="/" element={<Home  />} />
-            <Route path="/tables" element={<Tables data={data}/>} />
+            <Route path="/tables" element={<Tables data={data} apiData={apiData}/>} />
             <Route path="/charts" element={<Charts />} />
           </Routes>
           </div>
