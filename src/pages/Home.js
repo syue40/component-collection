@@ -6,11 +6,11 @@ import ReactMarkdown from "react-markdown";
 
 export const Home = (props) => {
   const linksList = [
-    "Xnl26qh5RXc",
-    "FNcJyTqUC4U",
-    "iQaycSD5GWE",
-    "TtcUQel6c64",
-    "4CeFuBDvWxc",
+    "8iU8LPEa4o0",
+    "CLeZyIID9Bo",
+    "Iyp7wpyZ3BA",
+    "gwDoRPcPxtc",
+    "Nwj9iVq0g5Y",
   ];
 
   return (
@@ -18,7 +18,7 @@ export const Home = (props) => {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 grid-rows-2 gap-4 mt-5 p-2">
         <div class="flex justify-center col-span-1 p-2 m-1 rounded-lg bg-white shadow-lg border">
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 row-span-1 gap-2 p-2">
-            <div class="flex justify-center col-span-2 row-span-1 p-2 m-1">
+            <div class="flex justify-center col-span-2 row-span-1 p-5 m-2">
               <figure>
               <img
               src={library}
@@ -30,7 +30,6 @@ export const Home = (props) => {
             </div>
             <div class="flex justify-center items-center md:col-span-1 lg: col-span-1 sm:col-span-2 row-span-2 p-2 m-1 ">
               <RandomQuoteGenerator></RandomQuoteGenerator>
-              {/* <p>asdf</p> */}
             </div>
           </div>
         </div>
@@ -40,7 +39,7 @@ export const Home = (props) => {
         <div class="flex justify-center items-center col-span-1 md:col-span-1 p-2 m-1 rounded-lg bg-white shadow-lg border ml-15 mr-15">
           <div className="mb-2 ml-12 mr-12">
             <div>
-              <h2 class="p-2 mb-2 font-bold">A Simple Video Carousel Component</h2>
+              <h2 class="p-2 mb-2 font-bold">Top Chillhop Playlist Carousel</h2>
             </div>
             <Carousel>
               {linksList.map((item) => {

@@ -23,14 +23,14 @@ export const RandomQuoteGenerator = (props) => {
 
   return (
     <div>
-      <div class="grid grid-rows-2 mt-10">
-        <div class="row-span-1">
+      <div class="grid grid-rows-4 mt-10">
+        <div class="row-span-3">
           <p class="text-2xl">
             <i>{quotes[activeQuote]}</i>
           </p>
         </div>
         <div class="justify-center items-center row-span-1 mt-10">
-        <Button variant="outlined" size="medium" startIcon={<ReplayIcon />} onClick={selectRandomQuote} style={{color:"black", borderColor:"black"}}>Outlined</Button>
+        <Button variant="outlined" size="medium" startIcon={<ReplayIcon />} onClick={selectRandomQuote} style={{color:"black", borderColor:"black"}}>New Office Quote</Button>
         </div>
       </div>
     </div>
