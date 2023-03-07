@@ -24,13 +24,13 @@ module.exports = {
       'md': '900px',
       // => @media (min-width: 768px) { ... }
 
-      'lg': '1380px',
+      'lg': '1460px',
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '1460px',
+      'xl': '16800px',
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1680px',
+      '2xl': '1920px',
       // => @media (min-width: 1536px) { ... }
     }
     },

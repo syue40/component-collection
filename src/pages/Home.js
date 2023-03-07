@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import library from "../images/library.png";
 import { RandomQuoteGenerator } from "../components/RandomQuoteGenerator";
 import Carousel, { CarouselItem } from "../components/Carousel";
-import ReactMarkdown from "react-markdown";
 
 export const Home = (props) => {
   const linksList = [
@@ -16,7 +15,7 @@ export const Home = (props) => {
   return (
     <div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 grid-rows-2 gap-4 mt-5 p-2">
-        <div class="flex justify-center col-span-1 p-2 m-1 rounded-lg bg-white shadow-lg border">
+        <div class="flex h-fit justify-center col-span-1 p-2 m-1 rounded-lg bg-white shadow-lg border">
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 row-span-1 gap-2 p-2">
             <div class="flex justify-center col-span-2 row-span-1 p-5 m-2">
               <figure>
@@ -31,7 +30,7 @@ export const Home = (props) => {
             </div>
           </div>
         </div>
-        <div class="flex justify-center col-span-1 row-span-2 p-2 m-1 rounded-lg bg-white shadow-lg border">
+        <div class="flex h-fit justify-center col-span-1 row-span-2 p-2 m-1 rounded-lg bg-white shadow-lg border">
           <div class="p-5 m-5">
             <h2 class="font-bold text-xl mt-5">
               Welcome to the Component Library
@@ -75,7 +74,7 @@ export const Home = (props) => {
             </p>
           </div>
         </div>
-        <div class="flex justify-center items-center col-span-1 md:col-span-1 p-2 m-1 rounded-lg bg-white shadow-lg border ml-15 mr-15">
+        <div class="flex h-fit justify-center items-center col-span-1 md:col-span-1 p-2 m-1 rounded-lg bg-white shadow-lg border ml-15 mr-15">
           <div className="mb-2 ml-12 mr-12">
             <div>
               <h2 class="p-2 mb-2 font-bold">Top Chillhop Playlist Carousel</h2>

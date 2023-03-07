@@ -45,8 +45,8 @@ const PieChart = (props) => {
     datasets: [
       {
         label: "Count",
-        data: [],
-        backgroundColor: generateRandomColor(10),
+        data: [10,10],
+        backgroundColor: "#8F8F8F",
       },
     ],
   });

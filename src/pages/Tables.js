@@ -19,14 +19,21 @@ export const Tables = (props) => {
   });
   useEffect(() => {
     if (props.apiData) {
+      console.log(props.apiData)
       setData({
         active_customers: props.apiData.active_customers,
         genre_ratios: props.apiData.genre_ratios,
         rentals_by_staff: props.apiData.rentals_by_staff,
         sales_data: props.apiData.sales_data,
+        total_clients: props.apiData.total_clients,
+        lifetime_sales: props.apiData.lifetime_sales,
+        operational_countries: props.apiData.operational_countries,
+        total_genres: props.apiData.total_genres,
+        different_languages: props.apiData.different_languages,
+        movies: props.apiData.movies,
       });
     }
-  }, [props]);
+  }, [props.apiData]);
 
   return (
     <div>
@@ -72,28 +79,29 @@ export const Tables = (props) => {
             <div class="grid grid-cols-3 col-span-3 gap-2">
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
                 <BigNumberCounter
-                  data={1042.34}
+                  data={data.lifetime_sales}
+                  dollar_amount={true}
                   title={"Total Lifetime Sales"}
                 />
               </div>
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-                <BigNumberCounter data={1420} title={"Total Clients"} />
+                <BigNumberCounter data={data.total_clients} title={"Total Clients"} />
               </div>
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-                <BigNumberCounter data={94} title={"Operational Countries"} />
+                <BigNumberCounter data={data.operational_countries} title={"Operational Countries"} />
               </div>
             </div>
           </div>
           <div class="flex sm:col-span-3 md:col-span-1 lg:col-span-1 row-span-1 gap-x-8 ">
             <div class="grid grid-cols-3 gap-2">
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-                <BigNumberCounter data={35} title={"Total Genres"} />
+                <BigNumberCounter data={data.total_genres} title={"Total Genres"} />
               </div>
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-                <BigNumberCounter data={23} title={"Different Languages"} />
+                <BigNumberCounter data={data.different_languages} title={"Different Languages"} />
               </div>
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-                <BigNumberCounter data={1620} title={"Movies"} />
+                <BigNumberCounter data={data.movies} title={"Movies"} />
               </div>
             </div>
           </div>

@@ -65,6 +65,8 @@ const BarChart = (props) => {
       <div class="flex justify-center lg:h-96 lg:w-96 md:h-60 md:w-60 sm:h-32 sm:w-32">
         <Bar
           data={data}
+          height={"100%"}
+          width={"100%"}
           options={{
             maintainAspectRatio: false,
             plugins: {
