@@ -38,10 +38,7 @@ const Carousel = ({ children }) => {
   });
 
   return (
-    <div
-      {...handlers}
-      className="carousel"
-    >
+    <div {...handlers} className="carousel">
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}

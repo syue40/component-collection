@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Button from '@mui/material/Button';
-import ReplayIcon from '@mui/icons-material/Replay';
+import Button from "@mui/material/Button";
+import ReplayIcon from "@mui/icons-material/Replay";
 export const RandomQuoteGenerator = (props) => {
   const [activeQuote, setActiveQuote] = useState(0);
   const quotes = [
@@ -30,7 +30,15 @@ export const RandomQuoteGenerator = (props) => {
           </p>
         </div>
         <div class="justify-center items-center row-span-1 mt-10">
-        <Button variant="outlined" size="medium" startIcon={<ReplayIcon />} onClick={selectRandomQuote} style={{color:"black", borderColor:"black"}}>New Office Quote</Button>
+          <Button
+            variant="outlined"
+            size="medium"
+            startIcon={<ReplayIcon />}
+            onClick={selectRandomQuote}
+            style={{ color: "black", borderColor: "black" }}
+          >
+            New Office Quote
+          </Button>
         </div>
       </div>
     </div>

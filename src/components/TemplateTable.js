@@ -18,30 +18,17 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { visuallyHidden } from "@mui/utils";
 
-function createData(
-  country_code,
-  region_name,
-  sub_region_name,
-  intermediate_region,
-  country_name,
-  income_group,
-  year,
-  total_gdp,
-  total_gdp_million,
-  gdp_variation
-) {
-  return {
-    country_code,
-    region_name,
-    sub_region_name,
-    intermediate_region,
-    country_name,
-    income_group,
-    year,
-    total_gdp,
-    total_gdp_million,
-    gdp_variation,
-  };
+function createData(data) {
+  let headers = data[0];
+  let results = [];
+  for (let i = 1; i < data.length; i++) {
+    let return_container = {};
+    for (let j = 0; j < data[i].length; j++) {
+      return_container[headers[j]] = data[i][j];
+    }
+    results.push(return_container);
+  }
+  return results;
 }
 
 function descendingComparator(a, b, orderBy) {
@@ -72,78 +59,33 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-  {
-    id: "country_code",
-    numeric: false,
-    disablePadding: false,
-    label: "Country Code",
-  },
-  {
-    id: "region_name",
-    numeric: false,
-    disablePadding: false,
-    label: "Region Name",
-  },
-  {
-    id: "sub_region_name",
-    numeric: false,
-    disablePadding: false,
-    label: "Sub-region Name",
-  },
-  {
-    id: "intermediate_region",
-    numeric: false,
-    disablePadding: false,
-    label: "Intermediate Region",
-  },
-  {
-    id: "country_name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name",
-  },
-  {
-    id: "income_group",
-    numeric: false,
-    disablePadding: false,
-    label: "Income Group",
-  },
-  {
-    id: "year",
-    numeric: true,
-    disablePadding: false,
-    label: "Year",
-  },
-  {
-    id: "total_gdp",
-    numeric: true,
-    disablePadding: false,
-    label: "Total GDP",
-  },
-  {
-    id: "total_gdp_million",
-    numeric: true,
-    disablePadding: false,
-    label: "Total GDP (millions)",
-  },
-  {
-    id: "gdp_variation",
-    numeric: true,
-    disablePadding: false,
-    label: "GDP Variation",
-  },
-];
+function headCellFactory(data) {
+  let headCellContainer = [];
+  for (const item in data) {
+    let dataLabel = {
+      id: data[item].toLowerCase().replace(/ /g, "_"),
+      numeric: false,
+      disablePadding: false,
+      label: data[item],
+    };
+    headCellContainer.push(dataLabel);
+  }
+  return headCellContainer;
+}
 
 function EnhancedTableHead(props) {
-  const {
-    order,
-    orderBy,
-    onRequestSort,
-  } = props;
+  const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
+  const [headCells, setHeadCells] = useState([]);
+  useEffect(() => {
+    if (props.apiData) {
+      console.log(props.apiData[0]);
+      let newHeadCells = headCellFactory(props.apiData[0]);
+      setHeadCells(newHeadCells);
+    }
+  }, [props.apiData]);
 
   return (
     <TableHead>
@@ -216,7 +158,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          World GDP Historical Data
+          {props.title}
         </Typography>
       )}
     </Toolbar>
@@ -234,28 +176,14 @@ export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = React.useState([])
+  const [rows, setRows] = React.useState([]);
 
   useEffect(() => {
-    if (props.data) {
-      let tempRows = []
-      for (let i = 1; i < (props.data).length -1; i++) {
-        tempRows.push(createData(
-          props.data[i][0],
-          props.data[i][1],
-          props.data[i][2],
-          props.data[i][3],
-          props.data[i][4],
-          props.data[i][5],
-          props.data[i][6],
-          props.data[i][7],
-          props.data[i][8],
-          props.data[i][9]
-        ))
-      }
-      setRows(tempRows)
+    if (props.apiData) {
+      let newData = createData(props.apiData);
+      setRows(newData);
     }
-  }, [props]);
+  }, [props.apiData]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -290,69 +218,62 @@ export default function EnhancedTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }} >
+    <Box sx={{ width: "100%" }}>
       <div className="shadow-xl">
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer >
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"} 
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody >
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  return (
-                    <TableRow
-                      hover
-                      tabIndex={-1}
-                      key={row.name}
-                    >
-                      <TableCell align="center">{row.country_code}</TableCell>
-                      <TableCell align="center">{row.region_name}</TableCell>
-                      <TableCell align="center">{row.sub_region_name}</TableCell>
-                      <TableCell align="center">{row.intermediate_region}</TableCell>
-                      <TableCell align="center">{row.country_name}</TableCell>
-                      <TableCell align="center">{row.income_group}</TableCell>
-                      <TableCell align="center">{row.year}</TableCell>
-                      <TableCell align="center">{row.total_gdp}</TableCell>
-                      <TableCell align="center">{row.total_gdp_million}</TableCell>
-                      <TableCell align="center">{row.gdp_variation}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 43 : 50) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+        <Paper sx={{ width: "100%", mb: 2 }}>
+          <EnhancedTableToolbar
+            numSelected={selected.length}
+            title={props.title}
+          />
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? "small" : "medium"}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+                apiData={props.apiData}
+              />
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    return (
+                      <TableRow hover tabIndex={-1} key={row.name}>
+                        {Object.values(row).map((key, value) => {
+                          return <TableCell align="center">{key}</TableCell>;
+                        })}
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 43 : 50) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
       </div>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}

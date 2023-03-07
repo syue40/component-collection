@@ -25,19 +25,20 @@ const PieChart = (props) => {
       "#EEBA0B",
       "#A63C06",
       "#710000",
-      "#F4E409"
+      "#F4E409",
     ];
 
     let result = [];
-    let count = result.length
-    while (count < index.length){
-        let currentColor = colorList[Math.floor(Math.random()*colorList.length)]
-        if(!(result.includes(currentColor))){
-          result.push(currentColor)
-          count += 1
-        }
+    let count = result.length;
+    while (count < index.length) {
+      let currentColor =
+        colorList[Math.floor(Math.random() * colorList.length)];
+      if (!result.includes(currentColor)) {
+        result.push(currentColor);
+        count += 1;
+      }
     }
-        
+
     return result;
   };
   const [pieData, setPieData] = useState({
@@ -45,7 +46,7 @@ const PieChart = (props) => {
     datasets: [
       {
         label: "Count",
-        data: [10,10],
+        data: [10, 10],
         backgroundColor: "#8F8F8F",
       },
     ],

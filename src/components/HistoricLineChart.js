@@ -40,7 +40,7 @@ function HistoricLineChart(props) {
 
   return (
     <div class="">
-        <div class="p-3">
+      <div class="p-3">
         <h2 className="font-bold">{props.title}</h2>
       </div>
       <div class="chart-container">
@@ -71,7 +71,7 @@ function HistoricLineChart(props) {
           }}
           options={{
             scales: {
-                dollars: {
+              dollars: {
                 type: "linear",
                 position: "right",
                 grid: {

@@ -21,16 +21,16 @@ module.exports = {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
-      'md': '900px',
+      'md': '1100px',
       // => @media (min-width: 768px) { ... }
 
-      'lg': '1460px',
+      'lg': '1650px',
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '16800px',
+      'xl': '1920px',
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1920px',
+      '2xl': '2564px',
       // => @media (min-width: 1536px) { ... }
     }
     },
