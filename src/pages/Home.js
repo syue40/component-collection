@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import library from "../images/library.png";
-import {RandomQuoteGenerator} from "../components/RandomQuoteGenerator"
+import { RandomQuoteGenerator } from "../components/RandomQuoteGenerator";
+import Carousel, { CarouselItem } from "../components/Carousel";
+
 export const Home = (props) => {
+  const linksList = [
+    "Xnl26qh5RXc",
+    "FNcJyTqUC4U",
+    "iQaycSD5GWE",
+    "TtcUQel6c64",
+    "4CeFuBDvWxc",
+  ];
+
   return (
     <div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-5 p-2">
@@ -28,7 +38,25 @@ export const Home = (props) => {
           </p>
         </div>
         <div class="flex justify-center col-span-1 md:col-span-2 p-2 m-1 rounded-lg bg-white shadow-lg border">
-          <p>P3</p>
+          <div className="mb-3">
+            <Carousel>
+              {linksList.map((item) => {
+                return (
+                  <CarouselItem>
+                    <iframe
+                      width="100%"
+                      height="510"
+                      src={`https://www.youtube.com/embed/${item}`}
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                    ></iframe>
+                  </CarouselItem>
+                );
+              })}
+            </Carousel>
+          </div>
         </div>
       </div>
     </div>

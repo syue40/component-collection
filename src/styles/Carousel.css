@@ -1,0 +1,50 @@
+.carousel {
+    overflow: hidden;
+  }
+  
+  .inner {
+    white-space: nowrap;
+    transition: transform 0.5s;
+  }
+  
+  .carousel-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    color: #fff;
+  }
+  
+  .indicators {
+    display: flex;
+    margin-top: 3px;
+    justify-content: center;
+  }
+  
+  .indicators > .updateArrows {
+    margin: 5px;
+    opacity: 0.8;
+    transition: 0.3s;
+  }
+
+  .indicators > div >  #activateButtons {
+    background-color: rgb(182, 182, 182);
+    margin-top: 9px;
+    margin-left: 7px;
+    margin-right: 7px;
+    width: 17px;
+    height: 17px;
+    border-radius:50%;
+    opacity: 0.5;
+    transition: 0.3s;
+  }
+
+  .indicators > div >  #activateButtons:hover {opacity: 1}
+  
+  .indicators > div > #activateButtons.active {
+    background-color: rgb(3, 3, 3);
+    opacity: 1;
+    color: #fff;
+  }
+  
+  .indicators > .updateArrows:hover  {opacity: 1}
