@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import "../styles/Histogram.css";
 
 function HistoricLineChart(props) {
   ChartJS.register(
@@ -39,13 +40,10 @@ function HistoricLineChart(props) {
 
   return (
     <div class="">
-      <div class="p-3">
+        <div class="p-3">
         <h2 className="font-bold">{props.title}</h2>
       </div>
-      <div
-        class="chart-container"
-        style={{ position: "relative", height: "50vh", width: "50vw" }}
-      >
+      <div class="chart-container">
         <Chart
           data={{
             datasets: [
@@ -73,7 +71,7 @@ function HistoricLineChart(props) {
           }}
           options={{
             scales: {
-              dollars: {
+                dollars: {
                 type: "linear",
                 position: "right",
                 grid: {
