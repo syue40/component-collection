@@ -1,46 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const PieChart = (props) => {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const generateRandomColor = (index) => {
     const colorList = [
-      "#204e8d",
-      "#ad4501",
-      "#f760ad",
-      "#24f580",
-      "#bcbc57",
-      "#66a61b",
-      "#c90dd6",
-      "#02986c",
-      "#0456d9",
-      "#91b049",
-      "#a2bf5b",
-      "#bb68de",
-      "#b4f090",
-      "#869805",
-      "#5daa3a",
-      "#4a0845",
-      "#7f5b03",
-      "#883015",
-      "#6190e2",
-      "#2f2590",
-      "#bc63fa",
-      "#42f2d7",
-      "#05d9dc",
-      "#99595d",
-      "#64dc8b",
-      "#e16020",
-      "#3a321a",
-      "#620df8",
-      "#c986d5",
-      "#5ca8e8",
-      "#02e056",
-      "#035f10",
+      "#00876c",
+      "#EF3E36",
+      "#17BEBB",
+      "#2E282A",
+      "#EDB88B",
+      "#FAD8D6",
+      "#BA7BA1",
+      "#C28CAE",
+      "#D0ABA0",
+      "#DEC4A1",
+      "#EDCF8E",
+      "#8CFF98",
+      "#d43d51",
+      "#FFFF82",
+      "#0077B6",
+      "#90E0EF",
+      "#EEBA0B",
+      "#A63C06",
+      "#710000",
+      "#F4E409"
     ];
-    return colorList.slice(0, index);
+
+    let result = [];
+    let count = result.length
+    while (count < index.length){
+        let currentColor = colorList[Math.floor(Math.random()*colorList.length)]
+        if(!(result.includes(currentColor))){
+          result.push(currentColor)
+          count += 1
+        }
+    }
+        
+    return result;
   };
   const [pieData, setPieData] = useState({
     labels: ["No data to show"],
@@ -64,7 +62,7 @@ const PieChart = (props) => {
           {
             label: "Count",
             data: res.data,
-            backgroundColor: generateRandomColor(10),
+            backgroundColor: generateRandomColor(res.data),
           },
         ],
       });
