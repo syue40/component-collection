@@ -10,7 +10,6 @@ async function getApiData(endpoint) {
         // },
       })
       .then((res) => {
-        console.log(res.data)
         return res.data;
       })
       .catch((err) => {

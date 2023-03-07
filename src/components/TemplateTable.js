@@ -63,7 +63,7 @@ function headCellFactory(data) {
   let headCellContainer = [];
   for (const item in data) {
     let dataLabel = {
-      id: data[item].toLowerCase().replace(/ /g, "_"),
+      id: (((data[item]).toLowerCase()).replace(/ /g, "_")).toString(),
       numeric: false,
       disablePadding: false,
       label: data[item],
@@ -81,7 +81,6 @@ function EnhancedTableHead(props) {
   const [headCells, setHeadCells] = useState([]);
   useEffect(() => {
     if (props.apiData) {
-      console.log(props.apiData[0]);
       let newHeadCells = headCellFactory(props.apiData[0]);
       setHeadCells(newHeadCells);
     }

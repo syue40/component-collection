@@ -5,6 +5,11 @@ import PieChart from "../components/TemplatePiechart";
 import BarChart from "../components/BarChart";
 import HistoricLineChart from "../components/HistoricLineChart";
 import BigNumberCounter from "../components/BigNumberCounter";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export const Tables = (props) => {
   const [data, setData] = useState({
@@ -17,9 +22,12 @@ export const Tables = (props) => {
       labels: [],
     },
   });
+  const [tableData, setTableData] = useState([]);
+  const [value, setValue] = React.useState("");
+  const [title, setTitle] = React.useState("");
+
   useEffect(() => {
     if (props.apiData) {
-      console.log(props.apiData);
       setData({
         active_customers: props.apiData.active_customers,
         genre_ratios: props.apiData.genre_ratios,
@@ -31,19 +39,53 @@ export const Tables = (props) => {
         total_genres: props.apiData.total_genres,
         different_languages: props.apiData.different_languages,
         movies: props.apiData.movies,
-        paymentData: props.apiData.paymentData,
+        payment_data: props.apiData.payment_data,
+        films_table: props.apiData.films_table,
       });
+      setTableData(props.apiData.payment_data);
+      setTitle("DVD Rental Data")
     }
-  }, [props.apiData]);
+  }, [props]);
+
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    if (event.target.value === "DVD Rental Data") {
+      setTitle("DVD Rental Data")
+      setTableData(data.payment_data);
+    } else if (event.target.value === "Inventory Data") {
+      setTitle("Inventory Data")
+      setTableData(data.films_table);
+    }
+  };
 
   return (
     <div>
       <div class="mt-8 ml-8 mr-8 pl-5 pr-5 mt-3">
-        <TemplateTable
-          data={props.data}
-          apiData={data.paymentData}
-          title={"DVD Rental Payment Data"}
-        />
+        <div class="flex m-auto mb-5 justify-start">
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Table View</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={value}
+                label="Table View"
+                onChange={handleChange}
+              >
+                <MenuItem value={"DVD Rental Data"}>DVD Rental Data</MenuItem>
+                <MenuItem value={"Inventory Data"}>Inventory Data</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </div>
+        <div>
+          <TemplateTable
+            data={props.data}
+            apiData={tableData}
+            title={title}
+          />
+        </div>
       </div>
       <div class="ml-8 mr-8 pl-5 pr-5 mt-3">
         <div class="grid grid-cols place-content-center sm:grid-cols md:grid-cols-2 lg:grid-cols-3 lg:gap-8 md:gap-4 sm:gap-2">
