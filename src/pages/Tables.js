@@ -57,8 +57,8 @@ export const Tables = (props) => {
             />
           </div>
         </div>
-        <div class="grid grid-rows-2 grid-cols-3 gap-8 mb-12">
-          <div class="flex justify-center row-span-2 col-span-2 rounded-lg bg-white shadow-lg border p-5">
+        <div class="grid sm:grid-rows-3 md:grid-rows-3 lg:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div class="flex justify-center sm:row-span-1 md:row-span-2 lg:row-span-2 sm:col-span-3 md:col-span-3 lg:col-span-2 rounded-lg bg-white shadow-lg border p-5">
             <HistoricLineChart
               title="DVD Rental Store Sales Data"
               line_color="rgba(54, 215, 255, 0.8)"
@@ -68,30 +68,33 @@ export const Tables = (props) => {
               data={data.sales_data}
             />
           </div>
-          <div class="flex row-span-1 col-span-1 gap-x-8 ">
-            <div class="grid grid-cols-3 gap-2">
-            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-              <BigNumberCounter data={1042.34} title={"Total Lifetime Sales"}/>
-            </div>
-            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-              <BigNumberCounter data={1420} title={"Total Clients"}/>
-            </div>
-            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-              <BigNumberCounter data={94} title={"Operational Countries"}/>
-            </div>
+          <div class="flex sm:col-span-3 md:col-span-1 lg:col-span-1 row-span-1 gap-x-8 ">
+            <div class="grid grid-cols-3 col-span-3 gap-2">
+              <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
+                <BigNumberCounter
+                  data={1042.34}
+                  title={"Total Lifetime Sales"}
+                />
+              </div>
+              <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
+                <BigNumberCounter data={1420} title={"Total Clients"} />
+              </div>
+              <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
+                <BigNumberCounter data={94} title={"Operational Countries"} />
+              </div>
             </div>
           </div>
-          <div class="flex row-span-1 col-span-1 gap-x-8">
-          <div class="grid grid-cols-3 gap-2">
-            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-              <BigNumberCounter data={35} title={"Total Genres"}/>
-            </div>
-            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-              <BigNumberCounter data={23} title={"Different Languages"}/>
-            </div>
-            <div class="flex justify-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
-              <BigNumberCounter data={1620} title={"Movies"}/>
-            </div>
+          <div class="flex sm:col-span-3 md:col-span-1 lg:col-span-1 row-span-1 gap-x-8 ">
+            <div class="grid grid-cols-3 gap-2">
+              <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
+                <BigNumberCounter data={35} title={"Total Genres"} />
+              </div>
+              <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
+                <BigNumberCounter data={23} title={"Different Languages"} />
+              </div>
+              <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
+                <BigNumberCounter data={1620} title={"Movies"} />
+              </div>
             </div>
           </div>
         </div>
