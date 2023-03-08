@@ -27,7 +27,7 @@ function App() {
       removeToken();
       navigate("/");
     }
-  }, []);
+  }, [token]);
 
   return (
     <div className="App">
@@ -36,7 +36,7 @@ function App() {
           <AnimatedBackground />
           {apiData && token && token !== "" && token !== undefined ? (
             <div>
-              <ResponsiveAppBar />
+              <ResponsiveAppBar removeToken={removeToken} navigate={navigate}/>
               <div class="lg:ml-36 lg:mr-36 md:ml-20 md:mr-20 sm:ml-6 sm:mr-6">
                 <Routes>
                   <Route path="/" element={<Home />} />
@@ -54,7 +54,7 @@ function App() {
                 <Route
                   path="/"
                   exact
-                  element={<SignInSignUp setToken={setToken}/>}
+                  element={<SignInSignUp setToken={setToken} />}
                 />
               </Routes>
             </div>

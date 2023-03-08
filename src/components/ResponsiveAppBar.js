@@ -11,11 +11,12 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import { NavLink } from "react-router-dom";
+import { handleLogout } from "../utils/httpClient"
 // import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "Tables", "Charts"];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -129,6 +130,12 @@ function ResponsiveAppBar() {
                 </Button>
               </NavLink>
             ))}
+            <Button
+              key={"logoutButton"}
+              onClick={() => handleLogout(props.navigate, props.removeToken)}
+              sx={{ my: 2, color: "white", display: "block" }}>
+                Logout
+            </Button>
           </Box>
         </Toolbar>
       </Container>

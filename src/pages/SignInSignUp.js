@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { signUpPost, loginPost } from "../utils/httpClient"
+
+
 
 const SignupSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(3, "Username must be at least 3 characters")
-    .required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,30})$/,
+      "Password must have one upper case, lowercase, and special character."
+    )
     .required("Required"),
   passwordConfirmation: Yup.string().oneOf(
     [Yup.ref("password"), null],
@@ -20,6 +25,10 @@ const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,30})$/,
+      "Password can only contain Latin letters."
+    )
     .required("Required"),
 });
 
@@ -47,7 +56,7 @@ const Tab = ({ children }) => {
   );
 };
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   return (
     <div>
       <h1 class="mb-5 mt-3">Login</h1>
@@ -56,7 +65,10 @@ const LoginForm = () => {
         validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            loginPost(values, props.setToken, props.navigate)
+            .catch((err) => {
+              console.log(err);
+            });
             setSubmitting(false);
           }, 400);
         }}
@@ -64,7 +76,7 @@ const LoginForm = () => {
         {({ isSubmitting }) => (
           <Form class="flex grid grid-rows-3 gap-4">
             <div class="justify-start row-span-1 ml-24 mr-24">
-              <span class="flex justify-start ml-3 mb-2">Username: </span>
+              <span class="flex justify-start ml-3 mb-2">Email: </span>
               <div class="grid grid-rows-2">
                 <Field type="email" name="email" class="border ml-3" />
                 <ErrorMessage name="email" component="div" />
@@ -93,7 +105,7 @@ const LoginForm = () => {
   );
 };
 
-const SignupForm = () => {
+const SignupForm = (props) => {
   return (
     <div class="">
       <div class="mb-5 mt-3">
@@ -105,20 +117,16 @@ const SignupForm = () => {
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            signUpPost(values, props.setToken, props.navigate)
+            .catch((err) => {
+              console.log(err);
+            });
             setSubmitting(false);
           }, 400);
         }}
       >
         {({ isSubmitting }) => (
-          <Form class="flex grid grid-rows-5 gap-3">
-            <div class="justify-start row-span-1 ml-24 mr-24">
-              <span class="flex justify-start ml-3 mb-2">Username: </span>
-              <div class="grid grid-rows-2">
-                <Field type="text" name="username" class="border ml-3" />
-                <ErrorMessage name="username" component="div" />
-              </div>
-            </div>
+          <Form class="flex grid grid-rows-4 gap-3">
             <div class="justify-start row-span-1 ml-24 mr-24">
               <span class="flex justify-start ml-3 mb-2">Email: </span>
               <div class="grid grid-rows-2">
@@ -162,16 +170,17 @@ const SignupForm = () => {
   );
 };
 
-export default function SignInSignUp() {
+export default function SignInSignUp(props) {
+  const navigate = useNavigate();
   return (
     <div class="flex justify-center items-center h-screen">
       <div class="justify-center items-center bg-white rounded-lg shadow-lg border h-fit w-1/4">
         <Tab>
           <div title="Login">
-            <LoginForm />
+            <LoginForm navigate={navigate} setToken={props.setToken}/>
           </div>
           <div title="Signup">
-            <SignupForm />
+            <SignupForm navigate={navigate} setToken={props.setToken}/>
           </div>
         </Tab>
       </div>
