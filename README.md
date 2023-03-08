@@ -35,5 +35,5 @@ I'm currently working on deploying this application to Azure. The login/signup m
  ┣ 📜App.js
  ┗ 📜index.js
 ```
-- Individual components are containd within the components directory
+- Individual components are contained within the components directory
 - Components import functions to process data and call the API from the utils directory
