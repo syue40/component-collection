@@ -3,6 +3,8 @@ This project is a collection of components that I've created and might use in th
 
 This repo has an Http Client which requests data from the ```component-collection-backend```: a Flask application which serves as this app's API. The flask application in turn, queries data from a locally run PostgreSQL database (plans to deploy it on Azure). The database contains a sample relational database for a DVD Rental store. It contains sales, customer, and film data.
 
+I added additional tables for user data to allow for sign-up/sign-in.
+
 ### Setting Up the Frontend
 Before setting up this repository, ensure that you have Node.js installed. An installation link can be found  <a href="https://nodejs.org/en/download/">here<a>.
 1. Clone this repository to your local device via link or ```git clone https://github.com/syue40/component-collection.git```
