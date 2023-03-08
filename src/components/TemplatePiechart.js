@@ -68,7 +68,7 @@ const PieChart = (props) => {
         ],
       });
     }
-  }, [props]);
+  }, [props.data]);
 
   return (
     <div>

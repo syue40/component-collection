@@ -55,7 +55,7 @@ const BarChart = (props) => {
         ],
       });
     }
-  }, [props]);
+  }, [props.data]);
 
   return (
     <div>

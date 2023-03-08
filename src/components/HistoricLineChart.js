@@ -36,7 +36,7 @@ function HistoricLineChart(props) {
         value: res.daily_revenue,
       });
     }
-  }, [props]);
+  }, [props.data]);
 
   return (
     <div class="">
