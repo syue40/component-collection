@@ -9,8 +9,10 @@ import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import { AnimatedBackground } from "./components/Background";
 import { getApiData } from "./utils/httpClient";
 import useToken from "./utils/UseToken";
+import { Chart, registerables } from 'chart.js';
 
 function App() {
+  Chart.register(...registerables);
   const [apiData, setApiData] = useState({});
   const navigate = useNavigate();
   const { token, removeToken, setToken } = useToken();
