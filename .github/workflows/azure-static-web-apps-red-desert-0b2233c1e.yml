@@ -32,7 +32,7 @@ jobs:
           output_location: "build" # Built app content directory - optional
           app_build_command: CI=false npm run build
         env:
-          REACT_APP_API_URL: "componentcollectionbackend.azurewebsites.net"
+          REACT_APP_API_URL: "componentcollectionbackend.azurewebsites.net/"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
