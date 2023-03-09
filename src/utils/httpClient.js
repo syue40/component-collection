@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/";
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 async function getApiData(endpoint) {
   return axios
@@ -21,7 +21,7 @@ async function loginPost(values, setToken, navigate) {
   let email = values['email']
   let password = values['password']
   return axios
-    .post(apiUrl.concat("login"), { email, password })
+    .post(apiUrl + "/login", { email, password })
     .then((res) => {
       if (res.data.account_found) {
         if (res.data.login) {
@@ -54,7 +54,7 @@ async function loginPost(values, setToken, navigate) {
 
 async function signUpPost(data, setToken, navigate) {
   return axios
-    .post(apiUrl + "signup", data,)
+    .post(apiUrl + "/signup", data,)
     .then((res) => {
       if (res.data.user_added === true) {
         setToken(res.data.access_token);
