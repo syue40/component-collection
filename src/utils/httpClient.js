@@ -3,7 +3,7 @@ const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 async function getApiData(endpoint) {
   return axios
-    .get(apiUrl + endpoint, {
+    .get(apiUrl + "/profile", {
       // for accessing protected routes
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
