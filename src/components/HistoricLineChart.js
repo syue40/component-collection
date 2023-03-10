@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import "../styles/Histogram.css";
 
 function HistoricLineChart(props) {
   ChartJS.register(
@@ -39,7 +38,7 @@ function HistoricLineChart(props) {
   }, [props.data]);
 
   return (
-    <div class="">
+    <div class="h-full w-full">
       <div class="p-3">
         <h2 className="font-bold">{props.title}</h2>
       </div>

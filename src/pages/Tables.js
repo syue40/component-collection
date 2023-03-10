@@ -123,8 +123,8 @@ export const Tables = (props) => {
             />
           </div>
         </div>
-        <div class="grid sm:grid-rows-3 md:grid-rows-3 lg:grid-rows-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <div class="flex justify-center sm:row-span-1 md:row-span-2 lg:row-span-2 sm:col-span-3 md:col-span-3 lg:col-span-2 rounded-lg bg-white shadow-lg border p-5">
+        <div class="flex grid justify-center items-center sm:grid-rows-3 md:grid-rows-3 lg:grid-rows-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 ">
+          <div class="flex justify-center sm:row-span-2 md:row-span-2 lg:row-span-2 sm:col-span-3 md:col-span-3 lg:col-span-2 rounded-lg bg-white shadow-lg border p-5">
             <HistoricLineChart
               title="DVD Rental Store Sales Data"
               line_color="rgba(54, 215, 255, 0.8)"
@@ -134,7 +134,7 @@ export const Tables = (props) => {
               data={data.sales_data}
             />
           </div>
-          <div class="flex sm:col-span-3 md:col-span-1 lg:col-span-1 row-span-1 gap-x-8 ">
+          <div class="flex justify-center sm:col-span-3 md:col-span-1 lg:col-span-1 row-span-1 gap-x-8 ">
             <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 col-span-3 gap-2">
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
                 <BigNumberCounter
@@ -157,7 +157,7 @@ export const Tables = (props) => {
               </div>
             </div>
           </div>
-          <div class="flex sm:col-span-3 md:col-span-1 lg:col-span-1 row-span-1 gap-x-8">
+          <div class="flex justify-center sm:col-span-3 md:col-span-1 lg:col-span-1 row-span-1 gap-x-8">
             <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 col-span-3 gap-2">
               <div class="flex justify-center items-center col-span-1 rounded-lg bg-white shadow-lg border m-3">
                 <BigNumberCounter
