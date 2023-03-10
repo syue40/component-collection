@@ -1,0 +1,23 @@
+#loginSignupButton {
+    opacity: 0.7;
+    background-color: rgb(255, 255, 255);
+    transition: background-color 0.3s ease
+}
+
+#loginSignupButton:hover {
+    opacity: 1;
+    background-color: rgb(231, 231, 231);
+    color: rgb(0, 0, 0);
+}
+
+#loginSubmitButton, #signUpSubmitButton{
+    opacity: 0.7;
+    background-color: rgb(255, 255, 255);
+    transition: background-color 0.4s ease
+}
+
+#loginSubmitButton:hover, #signUpSubmitButton:hover{
+    opacity: 1;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}

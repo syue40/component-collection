@@ -18,6 +18,10 @@ module.exports = {
         bermuda: "#78dcca",
       },
       screens: {
+      'xxs': '214px',
+      
+      'xs': '414px',
+
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
