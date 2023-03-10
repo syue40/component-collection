@@ -54,7 +54,7 @@ function HistoricLineChart(props) {
                 borderColor: props.line_color,
                 backgroundColor: props.line_color,
                 data: chartValues.value,
-                fill: true,
+                fill: false,
                 tension: 0.4,
               },
               {
