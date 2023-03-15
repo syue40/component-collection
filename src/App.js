@@ -2,8 +2,8 @@ import "./styles/App.css";
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { Charts } from "./pages/Charts";
 import { Tables } from "./pages/Tables";
+import { Profile } from "./pages/Profile";
 import SignInSignUp from "./pages/SignInSignUp"
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import { AnimatedBackground } from "./components/Background";
@@ -46,7 +46,7 @@ function App() {
                     path="/tables"
                     element={<Tables apiData={apiData} />}
                   />
-                  <Route path="/charts" element={<Charts />} />
+                  <Route path="/profile" element={<Profile />}/>
                 </Routes>
               </div>
             </div>

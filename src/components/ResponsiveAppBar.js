@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { handleLogout } from "../utils/httpClient"
 // import { useNavigate } from "react-router-dom";
 
-const pages = ["Home", "Tables", "Charts"];
+const pages = ["Home", "Tables", "Profile"];
 
 function ResponsiveAppBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
