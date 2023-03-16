@@ -27,6 +27,7 @@ function App() {
         });
     } else {
       removeToken();
+      alert("User Logged Out")
       navigate("/");
     }
   }, [token]);

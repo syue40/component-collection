@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
+import {
+  changeUserDetailsPost,
+} from "../utils/httpClient";
 import * as Yup from "yup";
 
 const MyTextArea = ({ label, ...props }) => {
@@ -21,7 +24,6 @@ export const Profile = (props) => {
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string().required("Last name is required"),
-    address: Yup.string().required("Address is required"),
     biography: Yup.string(),
   });
 
@@ -29,7 +31,6 @@ export const Profile = (props) => {
   const initialValues = {
     firstName: "",
     lastName: "",
-    address: "",
     biography: "",
   };
 
@@ -38,11 +39,16 @@ export const Profile = (props) => {
     const userData = {
       firstName: values.firstName,
       lastName: values.lastName,
-      address: values.address,
       biography: values.biography,
     };
 
-    console.log(JSON.stringify(userData));
+    changeUserDetailsPost(userData)
+      .then((res) => {
+        console.log(res)
+        alert("Update Success");
+        window.location.reload(false);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div class="">
@@ -66,7 +72,11 @@ export const Profile = (props) => {
                 </span>
                 <div class="">
                   <div>
-                    <Field id="firstName" name="firstName" class="border w-full" />
+                    <Field
+                      id="firstName"
+                      name="firstName"
+                      class="border w-full"
+                    />
                   </div>
                   <div>
                     <ErrorMessage name="firstName" />
@@ -80,15 +90,6 @@ export const Profile = (props) => {
                 <div class="">
                   <Field id="lastName" name="lastName" class="border w-full" />
                   <ErrorMessage name="lastName" />
-                </div>
-              </div>
-              <div class="mb-5">
-                <span class="flex justify-start ml-2 mb-2">
-                  <b>Address: </b>
-                </span>
-                <div class="">
-                  <Field id="address" name="address" class="border w-full" />
-                  <ErrorMessage name="address" />
                 </div>
               </div>
               <div>

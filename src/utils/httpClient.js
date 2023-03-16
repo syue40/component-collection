@@ -5,9 +5,9 @@ async function getApiData(endpoint) {
   return axios
     .get(apiUrl + "/profile", {
       // for accessing protected routes
-      // headers: {
-      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
     .then((res) => {
       return res.data;
@@ -18,8 +18,8 @@ async function getApiData(endpoint) {
 }
 
 async function loginPost(values, setToken, navigate) {
-  let email = values['email']
-  let password = values['password']
+  let email = values["email"];
+  let password = values["password"];
   return axios
     .post(apiUrl + "/login", { email, password })
     .then((res) => {
@@ -54,7 +54,7 @@ async function loginPost(values, setToken, navigate) {
 
 async function signUpPost(data, setToken, navigate) {
   return axios
-    .post(apiUrl + "/signup", data,)
+    .post(apiUrl + "/signup", data)
     .then((res) => {
       if (res.data.user_added === true) {
         setToken(res.data.access_token);
@@ -71,10 +71,27 @@ async function signUpPost(data, setToken, navigate) {
     });
 }
 
+function changeUserDetailsPost(details) {
+  return axios
+    .post(
+      apiUrl + "/update-profile",
+      details ,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
+    .then((res) => res)
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 const handleLogout = (navigate, removeToken) => {
   removeToken();
   // document.getElementById("root").style.filter = "blur(0px)";
   navigate("/");
 };
 
-export { getApiData, loginPost, signUpPost, handleLogout};
+export { getApiData, loginPost, signUpPost, handleLogout, changeUserDetailsPost };
