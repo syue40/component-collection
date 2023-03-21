@@ -43,7 +43,7 @@ function App() {
     setRemaining(1);
     removeToken();
     navigate("/");
-    alert("You have been logged out due to inactivity.")
+    alert("You have been logged out.")
   };
 
   const [state, setState] = useState("Active");
