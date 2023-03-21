@@ -7,13 +7,13 @@ import { Profile } from "./pages/Profile";
 import SignInSignUp from "./pages/SignInSignUp";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import { AnimatedBackground } from "./components/Background";
-import { getApiData, handleLogout } from "./utils/httpClient";
+import { getApiData } from "./utils/httpClient";
 import useToken from "./utils/UseToken";
 import { Chart, registerables } from "chart.js";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { useIdleTimer } from "react-idle-timer";
 
 function App() {
   /* Welcome to the Main Application for Component Collection. This component acts as the controller handling
@@ -40,9 +40,42 @@ function App() {
   const handleClose = () => setOpen(false);
   const handleLogout = () => {
     handleClose();
+    setRemaining(1);
     removeToken();
     navigate("/");
+    alert("You have been logged out due to inactivity.")
   };
+
+  const [state, setState] = useState("Active");
+  const [count, setCount] = useState(0);
+  const [remaining, setRemaining] = useState(1);
+
+  const onIdle = () => {
+    setState("Idle");
+  };
+
+  const onActive = () => {
+    setState("Active");
+  };
+
+  const onAction = () => {
+    setCount(count + 1);
+  };
+
+  const { getRemainingTime } = useIdleTimer({
+    onIdle,
+    onActive,
+    onAction,
+    timeout: 300_000,
+    throttle: 500,
+  });
+
+  useEffect(() => {
+    if (remaining === 0) {
+      handleLogout();
+    }
+  });
+
   useEffect(() => {
     /* A JWT 'token' is assigned to users after logging in with expiration of 2 hours. We check for this token here. */
     if (token && token !== "" && token !== undefined) {
@@ -53,16 +86,44 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
+      const interval = setInterval(() => {
+        setRemaining(Math.ceil(getRemainingTime() / 1000));
+      }, 500);
+
+      return () => {
+        clearInterval(interval);
+      };
     } else {
       removeToken();
       navigate("/");
     }
   }, [token]);
+
   return (
     <div className="App">
       <body>
         <div>
           <AnimatedBackground />
+          {remaining === 0 ? (
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography
+                  id="modal-modal-description"
+                  variant="h6"
+                  component="h2"
+                >
+                  You have been logged out due to inactivity
+                </Typography>
+              </Box>
+            </Modal>
+          ) : (
+            <></>
+          )}
           <Modal
             open={open}
             onClose={handleClose}
@@ -78,8 +139,18 @@ function App() {
                 Are you sure you want to logout?
               </Typography>
               <div class="grid grid-cols-2 gap-8 mt-5">
-                <button class="p-3 text-white rounded-xl bg-red-500" onClick={handleLogout}>Yes</button>
-                <button class="p-3 text-white rounded-xl bg-slate-500" onClick={handleClose}>No</button>
+                <button
+                  class="p-3 text-white rounded-xl bg-red-500"
+                  onClick={handleLogout}
+                >
+                  Yes
+                </button>
+                <button
+                  class="p-3 text-white rounded-xl bg-slate-500"
+                  onClick={handleClose}
+                >
+                  No
+                </button>
               </div>
             </Box>
           </Modal>

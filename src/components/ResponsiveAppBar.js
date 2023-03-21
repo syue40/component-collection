@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,13 +11,11 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import { NavLink } from "react-router-dom";
-import { handleLogout } from "../utils/httpClient"
-// import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "Tables", "Profile"];
 
 function ResponsiveAppBar(props) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -27,9 +25,12 @@ function ResponsiveAppBar(props) {
     setAnchorElNav(null);
   };
 
+  
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
+      
         <Toolbar disableGutters>
           <AccountBalanceIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
