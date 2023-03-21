@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import library from "../images/library.png";
 import { RandomQuoteGenerator } from "../components/RandomQuoteGenerator";
 import Carousel, { CarouselItem } from "../components/Carousel";

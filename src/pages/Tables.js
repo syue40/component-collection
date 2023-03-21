@@ -6,8 +6,6 @@ import BarChart from "../components/BarChart";
 import HistoricLineChart from "../components/HistoricLineChart";
 import BigNumberCounter from "../components/BigNumberCounter";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import InputBase from "@mui/material/InputBase";
@@ -45,7 +43,7 @@ export const Tables = (props) => {
       setTableData(props.apiData.payment_data);
       setTitle("DVD Rental Data");
     }
-  }, [props]);
+  }, [props.apiData]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -192,7 +190,6 @@ export const Tables = (props) => {
                 id="demo-customized-select-native"
                 value={value}
                 onChange={handleChange}
-                input={<BootstrapInput />}
               >
                 <option value={"DVD Rental Data"}>DVD Rental Data</option>
                 <option value={"Inventory Data"}>Inventory Data</option>
@@ -201,7 +198,7 @@ export const Tables = (props) => {
           </Box>
         </div>
         <div>
-          <TemplateTable data={props.data} apiData={tableData} title={title} />
+          <TemplateTable apiData={tableData} title={title} />
         </div>
       </div>
     </div>

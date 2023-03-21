@@ -43,7 +43,7 @@ function App() {
     setRemaining(1);
     removeToken();
     navigate("/");
-    alert("You have been logged out.")
+    alert("You have been logged out.");
   };
 
   const [state, setState] = useState("Active");
@@ -104,58 +104,39 @@ function App() {
       <body>
         <div>
           <AnimatedBackground />
-          {remaining === 0 ? (
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography
-                  id="modal-modal-description"
-                  variant="h6"
-                  component="h2"
-                >
-                  You have been logged out due to inactivity
-                </Typography>
-              </Box>
-            </Modal>
-          ) : (
-            <></>
-          )}
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography
-                id="modal-modal-description"
-                variant="h6"
-                component="h2"
-              >
-                Are you sure you want to logout?
-              </Typography>
-              <div class="grid grid-cols-2 gap-8 mt-5">
-                <button
-                  class="p-3 text-white rounded-xl bg-red-500"
-                  onClick={handleLogout}
-                >
-                  Yes
-                </button>
-                <button
-                  class="p-3 text-white rounded-xl bg-slate-500"
-                  onClick={handleClose}
-                >
-                  No
-                </button>
-              </div>
-            </Box>
-          </Modal>
+
           {apiData && token && token !== "" && token !== undefined ? (
             <div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-description"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Are you sure you want to logout?
+                  </Typography>
+                  <div class="grid grid-cols-2 gap-8 mt-5">
+                    <button
+                      class="p-3 text-white rounded-xl bg-red-500"
+                      onClick={handleLogout}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      class="p-3 text-white rounded-xl bg-slate-500"
+                      onClick={handleClose}
+                    >
+                      No
+                    </button>
+                  </div>
+                </Box>
+              </Modal>
               <ResponsiveAppBar
                 removeToken={removeToken}
                 navigate={navigate}
