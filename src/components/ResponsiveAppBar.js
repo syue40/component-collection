@@ -132,7 +132,7 @@ function ResponsiveAppBar(props) {
             ))}
             <Button
               key={"logoutButton"}
-              onClick={() => handleLogout(props.navigate, props.removeToken)}
+              onClick={props.handleOpen}
               sx={{ my: 2, color: "white", display: "block" }}>
                 Logout
             </Button>

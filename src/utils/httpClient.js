@@ -88,10 +88,5 @@ function changeUserDetailsPost(details) {
     });
 }
 
-const handleLogout = (navigate, removeToken) => {
-  removeToken();
-  // document.getElementById("root").style.filter = "blur(0px)";
-  navigate("/");
-};
 
-export { getApiData, loginPost, signUpPost, handleLogout, changeUserDetailsPost };
+export { getApiData, loginPost, signUpPost, changeUserDetailsPost };
