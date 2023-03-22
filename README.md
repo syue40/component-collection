@@ -61,7 +61,7 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 <img src="https://i.ibb.co/5BtmW3z/data-vis-2.png" alt="#">
 </figure>
 <figure>
-<img src="https://i.ibb.co/gynkKJF/data-vis-3.png" alt="#">
+<img src="https://i.ibb.co/G7hzSR3/data-vis-3.png" alt="#">
 <figcaption><i>Basic data visualizers created with ChartJS</i></figcaption>
 </figure>
 <hr>
