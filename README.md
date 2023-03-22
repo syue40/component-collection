@@ -41,3 +41,24 @@ I'm currently working on deploying this application to Azure. The login/signup m
 ```
 - Individual components are contained within the components directory
 - Components import functions to process data and call the API from the utils directory
+
+## Below Are Sample Images of Features Currently in this App
+
+<figure>
+<img src="https://i.ibb.co/r7w8bLG/login.png" alt="#">
+<figcaption><i>A simple login and signup flow</i></figcaption>
+</figure>
+<figure>
+<img src="https://i.ibb.co/LJHxkKB/data-vis-1.png" alt="#">
+</figure>
+<figure>
+<img src="https://i.ibb.co/5BtmW3z/data-vis-2.png" alt="#">
+</figure>
+<figure>
+<img src="https://i.ibb.co/gynkKJF/data-vis-3.png" alt="#">
+<figcaption><i>Basic data visualizers created with ChartJS</i></figcaption>
+</figure>
+<figure>
+<img src="https://i.ibb.co/BnxmM8t/profile.png" alt="#">
+<figcaption><i>Basic profile management options</i></figcaption>
+</figure>
