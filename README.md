@@ -53,20 +53,20 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 <img src="https://i.ibb.co/r7w8bLG/login.png" alt="#">
 <figcaption><i>A simple login and signup flow</i></figcaption>
 </figure>
-
+<br>
 <figure>
 <img src="https://i.ibb.co/LJHxkKB/data-vis-1.png" alt="#">
 </figure>
-
+<br>
 <figure>
 <img src="https://i.ibb.co/5BtmW3z/data-vis-2.png" alt="#">
 </figure>
-
+<br>
 <figure>
 <img src="https://i.ibb.co/gynkKJF/data-vis-3.png" alt="#">
 <figcaption><i>Basic data visualizers created with ChartJS</i></figcaption>
 </figure>
-
+<br>
 <figure>
 <img src="https://i.ibb.co/BnxmM8t/profile.png" alt="#">
 <figcaption><i>Basic profile management options</i></figcaption>
