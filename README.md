@@ -15,7 +15,12 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 
 
 ### Viewing the Applet
-I'm currently working on deploying this application to Azure. The login/signup menu is also still in the works.
+This applet is deployed on Azure! You can view this applet via: ```https://red-desert-0b2233c1e.2.azurestaticapps.net/```
+
+<figure>
+<img src="https://i.ibb.co/H4V7F7M/deployment.png" alt="#">
+<figcaption><i>Deployed resources on Azure</i></figcaption>
+</figure>
 
 ### Component Collection src File Structure
 ```
