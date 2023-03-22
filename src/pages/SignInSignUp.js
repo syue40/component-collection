@@ -76,16 +76,28 @@ const LoginForm = (props) => {
           <Form>
             <div class="flex grid grid-rows-3 gap-4 lg:pl-24 lg:pr-24 md:pl-18 md:pr-18 sm:pl-12 sm:pr-12 xs:pr-8 xs:pl-8 xxs:pr-5 xxs:pl-5">
               <div class="justify-start row-span-1">
-                <span class="flex justify-start ml-3 mb-2"><b>Email: </b></span>
+                <span class="flex justify-start ml-3 mb-2">
+                  <b>Email: </b>
+                </span>
                 <div class="grid grid-rows-2">
-                  <Field type="email" name="email" class="border ml-3 rounded-md p-2" />
+                  <Field
+                    type="email"
+                    name="email"
+                    class="border ml-3 rounded-md p-2"
+                  />
                   <ErrorMessage name="email" component="div" />
                 </div>
               </div>
               <div class="justify-start row-span-1">
-                <span class="flex justify-start ml-3 mb-2"><b>Password: </b></span>
+                <span class="flex justify-start ml-3 mb-2">
+                  <b>Password: </b>
+                </span>
                 <div class="grid grid-rows-2">
-                  <Field type="password" name="password" class="border ml-3 rounded-md p-2" />
+                  <Field
+                    type="password"
+                    name="password"
+                    class="border ml-3 rounded-md p-2"
+                  />
                   <ErrorMessage name="password" component="div" />
                 </div>
               </div>
@@ -108,6 +120,7 @@ const LoginForm = (props) => {
 };
 
 const SignupForm = (props) => {
+  const [error, setError] = React.useState("");
   return (
     <div class="mt-5">
       <Formik
@@ -115,9 +128,15 @@ const SignupForm = (props) => {
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            signUpPost(values, props.setToken, props.navigate).catch((err) => {
-              console.log(err);
-            });
+            signUpPost(values, props.setToken, props.navigate)
+              .then((res) => {
+                if (res.alert) {
+                  setError(res.msg);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
             setSubmitting(false);
           }, 400);
         }}
@@ -126,16 +145,28 @@ const SignupForm = (props) => {
           <Form>
             <div class="flex grid grid-rows-3 gap-4 lg:pl-24 lg:pr-24 md:pl-18 md:pr-18 sm:pl-12 sm:pr-12 xs:pr-8 xs:pl-8 xxs:pr-5 xxs:pl-5">
               <div class="justify-start row-span-1">
-                <span class="flex justify-start ml-3 mb-2"><b>Email: </b></span>
+                <span class="flex justify-start ml-3 mb-2">
+                  <b>Email: </b>
+                </span>
                 <div class="grid grid-rows-2">
-                  <Field type="email" name="email" class="border ml-3 rounded-md p-2" />
+                  <Field
+                    type="email"
+                    name="email"
+                    class="border ml-3 rounded-md p-2"
+                  />
                   <ErrorMessage name="email" component="div" />
                 </div>
               </div>
               <div class="justify-start row-span-1">
-                <span class="flex justify-start ml-3 mb-2"><b>Password: </b></span>
+                <span class="flex justify-start ml-3 mb-2">
+                  <b>Password: </b>
+                </span>
                 <div class="grid grid-rows-2">
-                  <Field type="password" name="password" class="border ml-3 rounded-md p-2" />
+                  <Field
+                    type="password"
+                    name="password"
+                    class="border ml-3 rounded-md p-2"
+                  />
                   <ErrorMessage name="password" component="div" />
                 </div>
               </div>
@@ -152,6 +183,7 @@ const SignupForm = (props) => {
                   <ErrorMessage name="passwordConfirmation" component="div" />
                 </div>
               </div>
+              <div>{error}</div>
               <div class="flex justify-center row-span-1 ml-8">
                 <button
                   type="submit"
