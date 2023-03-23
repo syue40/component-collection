@@ -59,13 +59,7 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 </figure>
 <hr>
 <figure>
-<img src="https://i.ibb.co/LJHxkKB/data-vis-1.png" alt="#">
-</figure>
-<figure>
-<img src="https://i.ibb.co/5BtmW3z/data-vis-2.png" alt="#">
-</figure>
-<figure>
-<img src="https://i.ibb.co/G7hzSR3/data-vis-3.png" alt="#">
+<img src="https://i.ibb.co/cr0sbgS/data-vis-1.png" alt="#">
 <figcaption><i>Basic data visualizers created with ChartJS</i></figcaption>
 </figure>
 <hr>
@@ -73,3 +67,14 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 <img src="https://i.ibb.co/BnxmM8t/profile.png" alt="#">
 <figcaption><i>Basic profile management options</i></figcaption>
 </figure>
+<hr>
+<figure>
+<img src="https://i.ibb.co/QrRy3P3/reset1.png" alt="#">
+<img src="https://i.ibb.co/VqP7NyY/reset2.png" alt="#">
+<figcaption><i>Menus for resetting lost passwords.</i></figcaption>
+<figure>
+</figure>
+<img src="https://i.ibb.co/9spt49M/resetemail.png" alt="#">
+<figcaption><i>Password reset email</i></figcaption>
+</figure>
+<hr>

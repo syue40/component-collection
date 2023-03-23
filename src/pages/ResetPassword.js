@@ -63,7 +63,7 @@ export const ResetPassword = (props) => {
                 <label class="font-bold m-3" htmlFor="email">Email</label>
                 <input class="border rounded-lg m-3" type="email" name="email" value={email} required onChange={(event) => setEmail(event.target.value)}/>
                 <div>
-                  <button class="bg-red-400 p-5 m-5 rounded-xl font-bold border shadow-lg hover:bg-red-300" type="submit">Send</button>
+                  <button class="bg-red-400 text-white p-5 m-5 rounded-xl font-bold border shadow-lg hover:bg-red-300" type="submit">Send</button>
                 </div>
               </form>
             </div>
