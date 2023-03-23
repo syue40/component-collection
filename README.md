@@ -65,6 +65,11 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 </figure>
 <hr>
 <figure>
+<img src="https://i.ibb.co/Vwvz9VK/homepage.png" alt="#">
+<figcaption><i>Home page with carousel, and just-for-fun components</i></ficaption>
+</figure>
+<hr>
+<figure>
 <img src="https://i.ibb.co/BnxmM8t/profile.png" alt="#">
 <figcaption><i>Basic profile management options</i></figcaption>
 </figure>
@@ -75,6 +80,7 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 <figcaption><i>Menus for resetting lost passwords.</i></figcaption>
 <figure>
 </figure>
+</br>
 <img src="https://i.ibb.co/9spt49M/resetemail.png" alt="#">
 <figcaption><i>Password reset email</i></figcaption>
 </figure>
