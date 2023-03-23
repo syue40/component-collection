@@ -9,7 +9,10 @@ I added additional tables for user data to allow for sign-up/sign-in.
 ### Viewing the Applet
 A demo version of this applet is deployed on Azure! You can view it <a href="https://red-desert-0b2233c1e.2.azurestaticapps.net/">here</a>.
 
-*@todo: create guest profile for demos*
+*@todo: create guest profile for demos*\
+*@todo: new forms and methods for writing to DB*\
+*@todo: create user profile page*
+
 <figure>
 <img src="https://i.ibb.co/H4V7F7M/deployment.png" alt="#">
 <figcaption><i>Deployed resources on Azure</i></figcaption>
