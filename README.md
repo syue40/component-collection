@@ -3,7 +3,7 @@ This project is a collection of components that I've created and might use in th
 
 This repo has an Http Client which requests data from the ```component-collection-backend```: a Flask application which serves as this app's API. The flask application in turn, queries data from a locally run PostgreSQL database. The database contains a sample relational database for a DVD Rental store. It contains sales, customer, and film data.
 
-I added additional tables for user data to allow for sign-up/sign-in.
+I added additional tables for user data to allow for sign-up/sign-in and resetting of lost passwords.
 
 
 ### Viewing the Applet
@@ -11,7 +11,8 @@ A demo version of this applet is deployed on Azure! You can view it <a href="htt
 
 *@todo: create guest profile for demos*\
 *@todo: new forms and methods for writing to DB*\
-*@todo: create user profile page*
+~~~*@todo: create user profile page*~~~\
+*@todo: create password change menu for logged in users*
 
 <figure>
 <img src="https://i.ibb.co/H4V7F7M/deployment.png" alt="#">
