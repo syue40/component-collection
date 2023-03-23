@@ -42,7 +42,7 @@ export const ResetPassword = (props) => {
           </div>
           {success ? (
             <div class="mt-5">
-              <h2 class="">
+              <h2 class="p-5 m-4">
                 Email Sent Successfully, Please Check Your Inbox to Reset Your
                 Password.
               </h2>
