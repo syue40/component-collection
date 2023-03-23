@@ -11,7 +11,7 @@ A demo version of this applet is deployed on Azure! You can view it <a href="htt
 
 *@todo: create guest profile for demos*\
 *@todo: new forms and methods for writing to DB*\
-~~~*@todo: create user profile page*~~~\
+~~*@todo: create user profile page*~~\
 *@todo: create password change menu for logged in users*
 
 <figure>
