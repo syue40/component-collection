@@ -257,7 +257,7 @@ export default function SignInSignUp(props) {
         </Tab>
         <div class="m-8 p-5">
           <NavLink to={"reset-password"}>
-            <Typography textAlign="center">Forgot Password?</Typography>
+            <Typography textAlign="center" class="hover:text-slate-400 text-m">Forgot Password?</Typography>
           </NavLink>
         </div>
       </div>

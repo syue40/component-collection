@@ -19,7 +19,7 @@ export const ResetPassword = (props) => {
     <div class="mt-5 flex justify-center items-center">
       <div class="bg-white rounded-xl shadow-xl w-1/4 h-fit">
         <div class="">
-          <div class="grid bg-black grid-cols-4 pt-3 rounded-t-xl">
+          <div class="grid bg-black grid-cols-8 pt-3 rounded-t-xl">
             <div class="col-span-1 m-2 cursor-pointer flex justify-end pb-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ export const ResetPassword = (props) => {
                 />
               </svg>
             </div>
-            <div class="col-span-3 flex justify-start mt-1 pb-5 pl-5 pr-5">
+            <div class="col-span-7 flex justify-start mt-1 pb-5 pl-5 pr-5">
               <span class="text-xl text-white">Lost your password?</span>
             </div>
           </div>

@@ -37,9 +37,27 @@ export const ResetPasswordPost = (props) => {
   };
 
   return (
-    <div class="mt-4 flex justify-center items-center">
-      <div class="mt-4 bg-white rounded-xl shadow-xl border">
-        <h2 class="p-4 text-xl">Reset Password</h2>
+    <div class="mt-4 flex justify-center items-center ">
+      <div class="mt-4 bg-white rounded-xl shadow-xl border w-1/4">
+        <h2 class="p-4 text-xl bg-black rounded-t-xl grid grid-cols-8">
+          <div class="flex justify-start ml-2 mt-1 hover:cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="white"
+              class="bi bi-arrow-left"
+              viewBox="0 0 16 16"
+              onClick={() => navigate("/")}
+            >
+              <path
+                fillRule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+              />
+            </svg>
+          </div>
+          <p class="flex justify-start text-white col-span-7">Reset Password</p>
+        </h2>
         {resetSuccess ? (
           <div class="">
             <div class="mt-4 mb-4 ">
@@ -59,7 +77,7 @@ export const ResetPasswordPost = (props) => {
           </div>
         ) : (
           <div class="">
-            <div class="mt-4 mb-4 ">
+            <div class="mt-5 mb-4 ">
               <h4 class="font-light pl-8 pr-8">
                 Password must be 8 characters long, have at least one uppercase
                 character, special character, and number.
@@ -71,7 +89,7 @@ export const ResetPasswordPost = (props) => {
               onSubmit={onsubmit}
             >
               <div class="">
-                <label htmlFor="email">New Password</label>
+                <label htmlFor="email" class="font-bold">New Password</label>
                 <input
                   class="border-2 rounded ml-8"
                   type="password"
@@ -80,7 +98,9 @@ export const ResetPasswordPost = (props) => {
                 />
               </div>
               <div class="mt-8">
-                <label class="" htmlFor="password">Confirm Password</label>
+                <label class="font-bold" htmlFor="password" >
+                  Confirm Password
+                </label>
                 <input
                   class="border-2 rounded ml-8"
                   type="password"
