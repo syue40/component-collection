@@ -1,7 +1,7 @@
 # Welcome to the Component Library
 This project is a collection of components that I've created and might use in the future. Some components found here include data visualization tools created using ChartJS, a simple login/sign-up component, and multiple utilities for calling an API.
 
-This repo has an Http Client which requests data from the ```component-collection-backend```: a Flask application which serves as this app's API. The flask application in turn, queries data from a locally run PostgreSQL database. The database contains a sample relational database for a DVD Rental store. It contains sales, customer, and film data.
+This repo has an Http Client which requests data from the ```component-collection-backend```: a Flask application which serves as this app's API. The flask application in turn, queries data from a locally run PostgreSQL database. The database contains a sample relational database for a DVD Rental store. It contains sales, customer, and film data. This app uses GitHub workflows to automatically build and deploy to Azure.
 
 I added additional tables for user data to allow for sign-up/sign-in and resetting of lost passwords.
 
