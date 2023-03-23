@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { signUpPost, loginPost } from "../utils/httpClient";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
@@ -246,6 +246,9 @@ export default function SignInSignUp(props) {
             <SignupForm navigate={navigate} setToken={props.setToken} />
           </div>
         </Tab>
+        <div class="">
+          <NavLink to={"reset-password"}><Typography textAlign="center">Forgot Password?</Typography></NavLink>
+        </div>
       </div>
     </div>
   );

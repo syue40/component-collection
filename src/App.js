@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useIdleTimer } from "react-idle-timer";
+import { ResetPassword } from "./pages/ResetPassword";
 
 function App() {
   /* Welcome to the Main Application for Component Collection. This component acts as the controller handling
@@ -104,7 +105,6 @@ function App() {
       <body>
         <div>
           <AnimatedBackground />
-
           {apiData && token && token !== "" && token !== undefined ? (
             <div>
               <Modal
@@ -161,6 +161,9 @@ function App() {
                   exact
                   element={<SignInSignUp setToken={setToken} />}
                 />
+                <Route
+                path="/reset-password"
+                element={<ResetPassword />}/>
               </Routes>
             </div>
           )}

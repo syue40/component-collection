@@ -71,22 +71,32 @@ async function signUpPost(data, setToken, navigate) {
     });
 }
 
-function changeUserDetailsPost(details) {
+async function changeUserDetailsPost(details) {
   return axios
-    .post(
-      apiUrl + "/update-profile",
-      details ,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    )
+    .post(apiUrl + "/update-profile", details, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
     .then((res) => res)
     .catch((err) => {
       console.log(err);
     });
 }
 
+async function resetPasswordPost(email) {
+  return axios
+    .post(apiUrl + "/reset-password", {email})
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err));
+}
 
-export { getApiData, loginPost, signUpPost, changeUserDetailsPost };
+export {
+  getApiData,
+  loginPost,
+  signUpPost,
+  changeUserDetailsPost,
+  resetPasswordPost,
+};
