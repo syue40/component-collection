@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useIdleTimer } from "react-idle-timer";
 import { ResetPassword } from "./pages/ResetPassword";
-
+import { ResetPasswordPost } from "./pages/ResetPasswordPost";
 function App() {
   /* Welcome to the Main Application for Component Collection. This component acts as the controller handling
    user authentication, login/logout, and API fetching. */
@@ -96,7 +96,7 @@ function App() {
       };
     } else {
       removeToken();
-      navigate("/");
+      // navigate("/");
     }
   }, [token]);
 
@@ -164,6 +164,10 @@ function App() {
                 <Route
                 path="/reset-password"
                 element={<ResetPassword />}/>
+                <Route
+                  path="/reset-password-post/:jwt"
+                  element={<ResetPasswordPost />}
+                />
               </Routes>
             </div>
           )}

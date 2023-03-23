@@ -23,8 +23,7 @@ async function loginPost(values, setToken, navigate) {
   return axios
     .post(apiUrl + "/login", { email, password })
     .then((res) => {
-      if (res.data.account_found) {
-        if (res.data.login) {
+      if (res.data.account_found && res.data.login) {
           setToken(res.data.access_token);
           navigate("/", {
             state: {
@@ -32,19 +31,9 @@ async function loginPost(values, setToken, navigate) {
               email: res.data.email,
             },
           });
-        } else {
-          //Wrong Password
-          return {
-            alert: true,
-            msg: "Wrong password",
-          };
-        }
       } else {
-        //Account not found. Need to sign up.
-        return {
-          alert: true,
-          msg: "No account found.",
-        };
+        // Return the error
+        return res;
       }
     })
     .catch((err) => {
@@ -86,11 +75,22 @@ async function changeUserDetailsPost(details) {
 
 async function resetPasswordPost(email) {
   return axios
-    .post(apiUrl + "/reset-password", {email})
+    .post(apiUrl + "/reset-password", { email })
     .then((res) => {
       return res;
     })
     .catch((err) => console.log(err));
+}
+
+async function resetPasswordAfterEmail(password) {
+  return axios
+    .post(apiUrl + "/reset-password-post", { password })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 export {
@@ -99,4 +99,5 @@ export {
   signUpPost,
   changeUserDetailsPost,
   resetPasswordPost,
+  resetPasswordAfterEmail
 };

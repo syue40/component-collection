@@ -58,6 +58,7 @@ const Tab = ({ children }) => {
 };
 
 const LoginForm = (props) => {
+  const [errorMessage, setErrorMessage] = useState("");
   return (
     <div class="mt-5">
       <Formik
@@ -65,16 +66,23 @@ const LoginForm = (props) => {
         validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            loginPost(values, props.setToken, props.navigate).catch((err) => {
-              console.log(err);
-            });
+            loginPost(values, props.setToken, props.navigate)
+              .then((res) => {
+                console.log(res)
+                if (res.data.alert) {
+                  setErrorMessage(res.data.alert);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
             setSubmitting(false);
           }, 400);
         }}
       >
         {({ isSubmitting }) => (
           <Form>
-            <div class="flex grid grid-rows-3 gap-4 lg:pl-24 lg:pr-24 md:pl-18 md:pr-18 sm:pl-12 sm:pr-12 xs:pr-8 xs:pl-8 xxs:pr-5 xxs:pl-5">
+            <div class="flex grid grid-rows-2 gap-4 lg:pl-24 lg:pr-24 md:pl-18 md:pr-18 sm:pl-12 sm:pr-12 xs:pr-8 xs:pl-8 xxs:pr-5 xxs:pl-5">
               <div class="justify-start row-span-1">
                 <span class="flex justify-start ml-3 mb-2">
                   <b>Email: </b>
@@ -100,8 +108,9 @@ const LoginForm = (props) => {
                   />
                   <ErrorMessage name="password" component="div" />
                 </div>
+                <p>{errorMessage}</p>
               </div>
-              <div class="flex justify-center row-span-1 ml-8">
+              <div class="flex justify-center row-span-1">
                 <button
                   class="border h-fit w-fit p-5 rounded-md"
                   type="submit"
@@ -184,7 +193,7 @@ const SignupForm = (props) => {
                 </div>
               </div>
               <div>{error}</div>
-              <div class="flex justify-center row-span-1 ml-8">
+              <div class="flex justify-center row-span-1">
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -246,8 +255,10 @@ export default function SignInSignUp(props) {
             <SignupForm navigate={navigate} setToken={props.setToken} />
           </div>
         </Tab>
-        <div class="">
-          <NavLink to={"reset-password"}><Typography textAlign="center">Forgot Password?</Typography></NavLink>
+        <div class="m-8 p-5">
+          <NavLink to={"reset-password"}>
+            <Typography textAlign="center">Forgot Password?</Typography>
+          </NavLink>
         </div>
       </div>
     </div>
