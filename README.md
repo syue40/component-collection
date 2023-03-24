@@ -16,7 +16,7 @@ A demo version of this applet is deployed on Azure! You can view it <a href="htt
 
 <figure>
 <img src="https://i.ibb.co/H4V7F7M/deployment.png" alt="#">
-<figcaption><i>Deployed resources on Azure. Fun fact, deployment of all these resources costs about $16/mo. Azure also offers free $300 credit on registration of a new account.</i></figcaption>
+<figcaption><i>Deployed resources on Azure. Fun fact, deployment of all these resources costs about $18/mo. Azure also offers free $300 credit on registration of a new account.</i></figcaption>
 </figure>
 
 ### Setting Up the Frontend
