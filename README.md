@@ -51,6 +51,7 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 ```
 - Individual components are contained within the components directory
 - Components import functions to process data and call the API from the utils directory
+- This app requires environment variables for certain credentials
 
 ## Below Are Sample Images of Features Currently in this App
 
