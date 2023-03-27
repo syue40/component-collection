@@ -24,13 +24,13 @@ async function loginPost(values, setToken, navigate) {
     .post(apiUrl + "/login", { email, password })
     .then((res) => {
       if (res.data.account_found && res.data.login) {
-          setToken(res.data.access_token);
-          navigate("/", {
-            state: {
-              token: res.data.access_token,
-              email: res.data.email,
-            },
-          });
+        setToken(res.data.access_token);
+        navigate("/", {
+          state: {
+            token: res.data.access_token,
+            email: res.data.email,
+          },
+        });
       } else {
         // Return the error
         return res;
@@ -73,6 +73,19 @@ async function changeUserDetailsPost(details) {
     });
 }
 
+async function changePasswordPost(details) {
+  return axios
+    .post(apiUrl + "/change-password", details, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then((res) => res)
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 async function resetPasswordPost(email) {
   return axios
     .post(apiUrl + "/reset-password", { email })
@@ -99,5 +112,6 @@ export {
   signUpPost,
   changeUserDetailsPost,
   resetPasswordPost,
-  resetPasswordAfterEmail
+  resetPasswordAfterEmail,
+  changePasswordPost,
 };

@@ -28,7 +28,7 @@ const LoginSchema = Yup.object().shape({
     .min(8, "Password must be at least 8 characters")
     .matches(
       /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,30})$/,
-      "Password can only contain Latin letters."
+      "Password must contain at least one upper and lower case letter, number, and special character."
     )
     .required("Required"),
 });
@@ -68,7 +68,7 @@ const LoginForm = (props) => {
           setTimeout(() => {
             loginPost(values, props.setToken, props.navigate)
               .then((res) => {
-                console.log(res)
+                console.log(res);
                 if (res.data.alert) {
                   setErrorMessage(res.data.alert);
                 }
@@ -257,7 +257,9 @@ export default function SignInSignUp(props) {
         </Tab>
         <div class="m-8 p-5">
           <NavLink to={"reset-password"}>
-            <Typography textAlign="center" class="hover:text-slate-400 text-m">Forgot Password?</Typography>
+            <Typography textAlign="center" class="hover:text-slate-400 text-m">
+              Forgot Password?
+            </Typography>
           </NavLink>
         </div>
       </div>
