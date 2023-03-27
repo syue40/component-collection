@@ -7,7 +7,7 @@ const MyTextArea = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
-  
+
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
@@ -20,8 +20,8 @@ const MyTextArea = ({ label, ...props }) => {
 };
 
 export const Profile = (props) => {
-  const [passwordMessage, setPasswordMessage] = React.useState("")
-  const [profileMessage, setProfileMessage] = React.useState("")
+  const [passwordMessage, setPasswordMessage] = React.useState("");
+  const [profileMessage, setProfileMessage] = React.useState("");
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string().required("Last name is required"),
@@ -73,10 +73,10 @@ export const Profile = (props) => {
     changeUserDetailsPost(userData)
       .then((res) => {
         alert("Update Success");
-        if(res.data.alert){
-          setProfileMessage("Error updating profile.")
+        if (res.data.alert) {
+          setProfileMessage("Error updating profile.");
         } else {
-          setProfileMessage("Profile successfully changed.")
+          setProfileMessage("Profile successfully changed.");
         }
       })
       .catch((err) => console.log(err));
@@ -91,7 +91,7 @@ export const Profile = (props) => {
 
     changePasswordPost(passwordData)
       .then((res) => {
-        if(res.data.password_error){
+        if (res.data.password_error) {
           setPasswordMessage(res.data.password_error);
         } else {
           setPasswordMessage("Password Changed Successfully");
@@ -110,141 +110,140 @@ export const Profile = (props) => {
       </div>
       <div class="md:ml-[10%] md:mr-[10%] xs:ml-8 xs:mr-8">
         <div class="flex grid md:grid-cols-2 xs:grid-cols-1 justify-center items-center ml-8 mr-8">
-        <div class="p-16 m-5 bg-white rounded-lg shadow-lg">
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ errors, touched }) => (
-              <Form class="">
-                <div class="mb-5 ">
-                  <span class="flex justify-start ml-2 mb-2">
-                    <b>First Name: </b>
-                  </span>
-                  <div class="">
-                    <div>
+          <div class="p-16 m-5 bg-white rounded-lg shadow-lg">
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ errors, touched }) => (
+                <Form class="">
+                  <div class="mb-5 ">
+                    <span class="flex justify-start ml-2 mb-2">
+                      <b>First Name: </b>
+                    </span>
+                    <div class="">
+                      <div>
+                        <Field
+                          id="firstName"
+                          name="firstName"
+                          class="border w-full"
+                        />
+                      </div>
+                      <div>
+                        <ErrorMessage name="firstName" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-5">
+                    <span class="flex justify-start ml-2 mb-2">
+                      <b>Last Name: </b>
+                    </span>
+                    <div class="">
                       <Field
-                        id="firstName"
-                        name="firstName"
+                        id="lastName"
+                        name="lastName"
                         class="border w-full"
                       />
-                    </div>
-                    <div>
-                      <ErrorMessage name="firstName" />
+                      <ErrorMessage name="lastName" />
                     </div>
                   </div>
-                </div>
-                <div class="mb-5">
-                  <span class="flex justify-start ml-2 mb-2">
-                    <b>Last Name: </b>
-                  </span>
-                  <div class="">
-                    <Field
-                      id="lastName"
-                      name="lastName"
-                      class="border w-full"
-                    />
-                    <ErrorMessage name="lastName" />
+                  <div>
+                    <span class="flex justify-start ml-2 mb-2">
+                      <b>Short Biography: </b>
+                    </span>
+                    <div class="">
+                      <MyTextArea
+                        name="biography"
+                        rows="4"
+                        class="border w-full"
+                        // placeholder="Once upon a time there was a princess who lived at the top of a glass hill."
+                      />
+                      <ErrorMessage name="biography" />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span class="flex justify-start ml-2 mb-2">
-                    <b>Short Biography: </b>
-                  </span>
-                  <div class="">
-                    <MyTextArea
-                      name="biography"
-                      rows="4"
-                      class="border w-full"
-                      // placeholder="Once upon a time there was a princess who lived at the top of a glass hill."
-                    />
-                    <ErrorMessage name="biography" />
+                  <div>{profileMessage}</div>
+                  <div class="flex justify-center row-span-1 mt-10">
+                    <button
+                      type="submit"
+                      class="border h-fit w-fit p-5 rounded-md"
+                    >
+                      Submit
+                    </button>
                   </div>
-                </div>
-                <div>{profileMessage}</div>
-                <div class="flex justify-center row-span-1 mt-10">
-                  <button
-                    type="submit"
-                    class="border h-fit w-fit p-5 rounded-md"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
-        <div class="p-16 m-5 bg-white rounded-lg shadow-lg">
-          <Formik
-            initialValues={initialValuesPassword}
-            validationSchema={validationSchemaPassword}
-            onSubmit={handleChangePassword}
-          >
-            {({ errors, touched }) => (
-              <Form >
-                <div class="mb-5">
-                  <span class="flex justify-start ml-2 mb-2">
-                    <b>Old Password: </b>
-                  </span>
-                  <div class="">
-                    <div>
+                </Form>
+              )}
+            </Formik>
+          </div>
+          <div class="p-16 m-5 bg-white rounded-lg shadow-lg">
+            <Formik
+              initialValues={initialValuesPassword}
+              validationSchema={validationSchemaPassword}
+              onSubmit={handleChangePassword}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <div class="mb-5">
+                    <span class="flex justify-start ml-2 mb-2">
+                      <b>Old Password: </b>
+                    </span>
+                    <div class="">
+                      <div>
+                        <Field
+                          id="oldPassword"
+                          name="oldPassword"
+                          type="password"
+                          class="border w-full"
+                        />
+                      </div>
+                      <div>
+                        <ErrorMessage name="oldPassword" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-5">
+                    <span class="flex justify-start ml-2 mb-2">
+                      <b>New Password: </b>
+                    </span>
+                    <div class="">
                       <Field
-                        id="oldPassword"
-                        name="oldPassword"
+                        id="newPassword"
+                        name="newPassword"
                         type="password"
                         class="border w-full"
                       />
+                      <ErrorMessage name="newPassword" />
                     </div>
+                  </div>
+                  <div class="mb-5">
+                    <span class="flex justify-start ml-2 mb-2">
+                      <b>Re-type New Password: </b>
+                    </span>
                     <div>
-                      <ErrorMessage name="oldPassword" />
+                      <Field
+                        id="newPasswordVerify"
+                        name="newPasswordVerify"
+                        type="password"
+                        class="border w-full"
+                      />
+                      <ErrorMessage name="newPasswordVerify" />
                     </div>
                   </div>
-                </div>
-                <div class="mb-5">
-                  <span class="flex justify-start ml-2 mb-2">
-                    <b>New Password: </b>
-                  </span>
-                  <div class="">
-                    <Field
-                      id="newPassword"
-                      name="newPassword"
-                      type="password"
-                      class="border w-full"
-                    />
-                    <ErrorMessage name="newPassword" />
+                  <div>{passwordMessage}</div>
+                  <div class="flex justify-center row-span-1 mt-10">
+                    <button
+                      type="submit"
+                      class="border h-fit w-fit p-5 rounded-md"
+                    >
+                      Submit
+                    </button>
                   </div>
-                </div>
-                <div class="mb-5">
-                  <span class="flex justify-start ml-2 mb-2">
-                    <b>Re-type New Password: </b>
-                  </span>
-                  <div>
-                    <Field
-                      id="newPasswordVerify"
-                      name="newPasswordVerify"
-                      type="password"
-                      class="border w-full"
-                    />
-                    <ErrorMessage name="newPasswordVerify" />
-                  </div>
-                </div>
-                <div>{passwordMessage}</div>
-                <div class="flex justify-center row-span-1 mt-10">
-                  <button
-                    type="submit"
-                    class="border h-fit w-fit p-5 rounded-md"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
       </div>
-      </div>
-      
     </div>
   );
 };
