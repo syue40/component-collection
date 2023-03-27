@@ -94,6 +94,7 @@ export const ResetPasswordPost = (props) => {
                   class="border-2 rounded ml-8"
                   type="password"
                   name="password"
+                  id="reset-password"
                   required
                 />
               </div>
@@ -104,6 +105,7 @@ export const ResetPasswordPost = (props) => {
                 <input
                   class="border-2 rounded ml-8"
                   type="password"
+                  id="reset-password-confirm"
                   name="confirm-password"
                   required
                 />
