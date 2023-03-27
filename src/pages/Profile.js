@@ -108,15 +108,16 @@ export const Profile = (props) => {
         </h1>
         <hr style={{ backgroundColor: "#515152", borderColor: "#515152" }}></hr>
       </div>
-      <div class="flex grid grid-cols-2 justify-center items-center ml-8 mr-8">
-        <div class="pl-8 pr-8">
+      <div class="md:ml-[10%] md:mr-[10%] xs:ml-8 xs:mr-8">
+        <div class="flex grid md:grid-cols-2 xs:grid-cols-1 justify-center items-center ml-8 mr-8">
+        <div class="p-16 m-5 bg-white rounded-lg shadow-lg">
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({ errors, touched }) => (
-              <Form class="p-12 m-5 bg-white rounded-lg shadow-lg">
+              <Form class="">
                 <div class="mb-5 ">
                   <span class="flex justify-start ml-2 mb-2">
                     <b>First Name: </b>
@@ -174,14 +175,14 @@ export const Profile = (props) => {
             )}
           </Formik>
         </div>
-        <div class="pl-8 pr-8">
+        <div class="p-16 m-5 bg-white rounded-lg shadow-lg">
           <Formik
             initialValues={initialValuesPassword}
             validationSchema={validationSchemaPassword}
             onSubmit={handleChangePassword}
           >
             {({ errors, touched }) => (
-              <Form class="p-12 m-5 bg-white rounded-lg shadow-lg">
+              <Form >
                 <div class="mb-5">
                   <span class="flex justify-start ml-2 mb-2">
                     <b>Old Password: </b>
@@ -242,6 +243,8 @@ export const Profile = (props) => {
           </Formik>
         </div>
       </div>
+      </div>
+      
     </div>
   );
 };
