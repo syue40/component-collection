@@ -1,7 +1,7 @@
 import "./styles/App.css";
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Home } from "./pages/Home";
+import  Home  from "./pages/Home";
 import { Tables } from "./pages/Tables";
 import { Profile } from "./pages/Profile";
 import SignInSignUp from "./pages/SignInSignUp";
@@ -16,6 +16,7 @@ import Modal from "@mui/material/Modal";
 import { useIdleTimer } from "react-idle-timer";
 import { ResetPassword } from "./pages/ResetPassword";
 import { ResetPasswordPost } from "./pages/ResetPasswordPost";
+import BrowseMovies from "./pages/BrowseMovies";
 function App() {
   /* Welcome to the Main Application for Component Collection. This component acts as the controller handling
    user authentication, login/logout, and API fetching. */
@@ -148,6 +149,10 @@ function App() {
                   <Route
                     path="/tables"
                     element={<Tables apiData={apiData} />}
+                  />
+                  <Route
+                  path="/browse"
+                  element={<BrowseMovies movies={apiData.movies}/>}
                   />
                   <Route path="/profile" element={<Profile />} />
                 </Routes>

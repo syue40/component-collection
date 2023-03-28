@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import library from "../images/library.png";
 import { RandomQuoteGenerator } from "../components/RandomQuoteGenerator";
 import Carousel, { CarouselItem } from "../components/Carousel";
+import MovieGallery from "../components/MovieGallery";
 
-export const Home = (props) => {
+export default function Home() {
   const linksList = [
     "8iU8LPEa4o0",
     "CLeZyIID9Bo",
@@ -11,6 +12,8 @@ export const Home = (props) => {
     "gwDoRPcPxtc",
     "Nwj9iVq0g5Y",
   ];
+
+
 
   return (
     <div>
@@ -101,4 +104,4 @@ export const Home = (props) => {
       </div>
     </div>
   );
-};
+}

@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import { NavLink } from "react-router-dom";
 
-const pages = ["Home", "Tables", "Profile"];
+const pages = ["Home", "Tables", "Browse", "Profile"];
 
 function ResponsiveAppBar(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -93,6 +93,12 @@ function ResponsiveAppBar(props) {
                   </MenuItem>
                 </NavLink>
               ))}
+              <Button
+              key={"logoutButton"}
+              onClick={props.handleOpen}
+              sx={{ color: "black"}}>
+                Logout
+            </Button>
             </Menu>
           </Box>
           <AccountBalanceIcon
