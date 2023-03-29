@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const MovieGallery = ({ movies }) => {
   //   const [currentMovies, setCurrentMovies] = useState(["", "", ""]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage, setMoviesPerPage] = useState(40);
+  const [moviesPerPage, setMoviesPerPage] = useState(20);
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter the movies based on the search query

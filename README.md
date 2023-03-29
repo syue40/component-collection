@@ -9,6 +9,7 @@ I added additional tables for user data to allow for sign-up/sign-in and resetti
 ### Viewing the Applet
 A demo version of this applet is deployed on Azure! You can view it <a href="https://red-desert-0b2233c1e.2.azurestaticapps.net/">here</a>.
 
+*@todo: create additional filters for browsing movies*\
 *@todo: create guest profile for demos*\
 *@todo: new forms and methods for writing to DB*\
 ~~*@todo: create user profile page*~~\
@@ -63,6 +64,11 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 <figure>
 <img src="https://i.ibb.co/cr0sbgS/data-vis-1.png" alt="#">
 <figcaption><i>Basic data visualizers created with ChartJS</i></figcaption>
+</figure>
+<hr>
+<figure>
+<img src="https://i.ibb.co/yWZp8BV/local.png" alt="#">
+<figcaption><i>Browse and filter fetched movies list (no thumbnails yet :p)</i></figcaption>
 </figure>
 <hr>
 <figure>
