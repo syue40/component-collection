@@ -1,7 +1,7 @@
 # Welcome to the Component Library
-This project is a collection of components that I've created and might use in the future. Some components found here include data visualization tools created using ChartJS, a simple login/sign-up component, and methods for calling an API and managing user information (passwords, biography, details, etc.).
+This project is a combination of a DVD Rental store admin console and a collection of components that I've created and may use in the future. Some components found here include data visualization tools created using ChartJS, a simple login/sign-up component, a gallery for browsing inventory, and methods for calling an API and managing user information (passwords, biography, details, etc.).
 
-This repo has an Http Client which requests data from the ```component-collection-backend```: a Flask application which serves as this app's API. The API queries data from a locally run PostgreSQL database. The database contains a sample relational database for a DVD Rental store. It contains sales, customer, and film data. This app uses GitHub workflows to automatically build and deploy to Azure when code is merged into ```master```.
+This repo has an Http Client which requests data from the ```component-collection-backend```: a Flask application which serves as this app's API. The API queries data from a locally run PostgreSQL database. The database contains a sample relational database for a **DVD Rental store**. It contains sales, customer, and film data. This app uses GitHub workflows to automatically build and deploy to Azure when code is merged into ```master```.
 
 I added additional tables for user data to allow for sign-up/sign-in and resetting of lost passwords.
 
@@ -10,6 +10,7 @@ I added additional tables for user data to allow for sign-up/sign-in and resetti
 A demo version of this applet is deployed on Azure! You can view it <a href="https://red-desert-0b2233c1e.2.azurestaticapps.net/">here</a>.
 
 *@todo: create additional filters for browsing movies*\
+*@todo: add functions to add new buildings, edit entries*\
 *@todo: create guest profile for demos*\
 *@todo: new forms and methods for writing to DB*\
 ~~*@todo: create user profile page*~~\
