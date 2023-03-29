@@ -1,38 +1,59 @@
 import React, { useState, useEffect } from "react";
 
 const MovieGallery = ({ movies }) => {
-//   const [currentMovies, setCurrentMovies] = useState(["", "", ""]);
-const [currentPage, setCurrentPage] = useState(1);
-const [moviesPerPage, setMoviesPerPage] = useState(30);
-const [searchQuery, setSearchQuery] = useState('');
+  //   const [currentMovies, setCurrentMovies] = useState(["", "", ""]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage, setMoviesPerPage] = useState(40);
+  const [searchQuery, setSearchQuery] = useState("");
 
-// Filter the movies based on the search query
-const filteredMovies = movies.filter(movie => {
-  return movie.title.toLowerCase().includes(searchQuery.toLowerCase());
-});
+  // Filter the movies based on the search query
+  const filteredMovies = movies.filter((movie) => {
+    return movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
-// Calculate the index of the last movie on the current page
-const lastIndex = currentPage * moviesPerPage;
-// Calculate the index of the first movie on the current page
-const firstIndex = lastIndex - moviesPerPage;
-// Get the movies to display on the current page
-const currentMovies = filteredMovies.slice(firstIndex, lastIndex);
+  // Calculate the index of the last movie on the current page
+  const lastIndex = currentPage * moviesPerPage;
+  // Calculate the index of the first movie on the current page
+  const firstIndex = lastIndex - moviesPerPage;
+  // Get the movies to display on the current page
+  const currentMovies = filteredMovies.slice(firstIndex, lastIndex);
 
-// Calculate the total number of pages
-const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
 
-// Create an array of page numbers to use for pagination
-const pageNumbers = [];
-for (let i = 1; i <= totalPages; i++) {
-  pageNumbers.push(i);
-}
+  // Create an array of page numbers to use for pagination
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
+  const maxPageNumbers = 5;
+
+  // Determine the start and end page numbers based on the current page
+  let startPage = Math.max(currentPage - Math.floor(maxPageNumbers / 2), 1);
+  let endPage = Math.min(startPage + maxPageNumbers - 1, totalPages);
+
+  // Adjust the start and end page numbers if there are not enough pages to show
+  if (endPage - startPage + 1 < maxPageNumbers) {
+    if (startPage === 1) {
+      endPage = Math.min(maxPageNumbers, totalPages);
+    } else {
+      startPage = Math.max(endPage - maxPageNumbers + 1, 1);
+    }
+  }
   const handleClick = (e) => {
-    console.log(e.target.id)
+    console.log(e.target.id);
     setCurrentPage(parseInt(e.target.id));
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="rounded-xl">
+      <div class="ml-8 mr-8 pl-5 pr-5 mt-3">
+        <h1 class="flex justify-start font-bold text-2xl ml-5 mt-5">
+          Browse Movie Inventory
+        </h1>
+        <hr style={{ backgroundColor: "#515152", borderColor: "#515152" }}></hr>
+      </div>
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center">
           <div className="relative rounded-md shadow-sm w-full max-w-md">
@@ -58,31 +79,56 @@ for (let i = 1; i <= totalPages; i++) {
             </div>
           </div>
         </div>
-        <div className="mt-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 z-40 opacity-100">
           {currentMovies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
-        <nav className="mt-8 flex justify-center">
-          <div className="rounded-md shadow">
-            <div className="flex">
-              {pageNumbers.map((number) => (
+        <div class="m-5 p-3 gap-2">
+          {totalPages > 1 && (
+            <div>
+              {startPage !== 1 && (
                 <button
-                  key={number}
-                  id={number}
-                  onClick={handleClick}
-                  className={`px-3 py-2 rounded-l-md rounded-r-none font-medium text-black hover:text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out ${
-                    currentPage === number
+                  onClick={() => setCurrentPage(1)}
+                  className={`px-3 py-2 rounded-md font-medium text-black hover:text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out ${
+                    startPage === currentPage
                       ? "bg-gray-200"
                       : "bg-white border-gray-300"
                   }`}
                 >
-                  {number}
+                  1
+                </button>
+              )}
+              {startPage > 2 && <span class="m-1 p-1">...</span>}
+              {Array.from({ length: endPage - startPage + 1 }).map((_, i) => (
+                <button
+                  key={startPage + i}
+                  onClick={() => setCurrentPage(startPage + i)}
+                  className={`px-3 m-1 py-2 rounded-md font-medium text-black hover:text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out ${
+                    startPage + i === currentPage
+                      ? "bg-gray-200"
+                      : "bg-white border-gray-300"
+                  }`}
+                >
+                  {startPage + i}
                 </button>
               ))}
+              {endPage < totalPages - 1 && <span class="m-1 p-1">...</span>}
+              {endPage !== totalPages && (
+                <button
+                  onClick={() => setCurrentPage(totalPages)}
+                  class={`px-3 py-2 rounded-md font-medium text-black hover:text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out ${
+                    totalPages === currentPage
+                      ? "bg-gray-200"
+                      : "bg-white border-gray-300"
+                  }`}
+                >
+                  {totalPages}
+                </button>
+              )}
             </div>
-          </div>
-        </nav>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -103,8 +149,14 @@ const MovieCard = ({ movie }) => {
         <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
           {movie.description}
         </p>
-        <div class="mt-3 flex items-center justify-between">
-          <p class="text-sm leading-5 text-gray-500">{movie.genre}</p>
+        <div class="mt-2 flex grid grid-cols-2 items-center justify-between">
+            <p>Rated: {movie.rating}</p>
+            <p>Released: {movie.release_year}</p>
+        </div>
+        <div class="mt-3 flex grid grid-cols-3 items-center justify-between">
+          <p class="text-sm leading-5 text-gray-500">{movie.category}</p>
+          <p class="text-sm leading-5 text-gray-500">{movie.language}</p>
+          <p class="text-sm leading-5 text-gray-500">{movie.length} mins</p>
         </div>
       </div>
     </div>

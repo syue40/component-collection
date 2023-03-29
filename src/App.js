@@ -68,7 +68,7 @@ function App() {
     onIdle,
     onActive,
     onAction,
-    timeout: 300_000,
+    timeout: 1_000_000,
     throttle: 500,
   });
 

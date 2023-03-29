@@ -103,10 +103,7 @@ export default function BrowseMovies(props) {
 
   return (
     <div class="m-5">
-      <h1>Movies Page</h1>
-      <div>
         <MovieGallery movies={movieDemoObjects}/>
-      </div>
     </div>
   );
 }
