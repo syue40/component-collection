@@ -10,7 +10,7 @@ I added additional tables for user data to allow for sign-up/sign-in and resetti
 A demo version of this applet is deployed on Azure! You can view it <a href="https://red-desert-0b2233c1e.2.azurestaticapps.net/">here</a>.
 
 *@todo: create additional filters for browsing movies*\
-*@todo: add functions to add new buildings, edit entries*\
+*@todo: add functions to add new movies, edit entries*\
 *@todo: create guest profile for demos*\
 *@todo: new forms and methods for writing to DB*\
 ~~*@todo: create user profile page*~~\
