@@ -78,7 +78,7 @@ Before setting up this repository, ensure that you have Node.js installed. An in
 </figure>
 <hr>
 <figure>
-<img src="https://i.ibb.co/BnxmM8t/profile.png" alt="#">
+<img src="https://i.ibb.co/m45BdMr/data-vis-9.png" alt="#">
 <figcaption><i>Basic profile management options</i></figcaption>
 </figure>
 <hr>
