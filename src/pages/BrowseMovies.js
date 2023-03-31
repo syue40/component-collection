@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import MovieGallery from "../components/MovieGallery";
+import LoadingSpinner from "../components/LoadingSpinner";
 export default function BrowseMovies(props) {
+  const [loading, setLoading] = useState(true)
     useEffect(() => {
         // This function will run after the component renders for the first time
         // You can fetch data or perform any other side effect here
         if(props.movies){
             setMovieDemoObjects(props.movies)
+            setLoading(false)
         }
+        
         
         // Return a cleanup function to be executed before the component unmounts
         return () => {
@@ -103,7 +107,7 @@ export default function BrowseMovies(props) {
 
   return (
     <div class="m-5">
-        <MovieGallery movies={movieDemoObjects}/>
+        {loading ? <LoadingSpinner/> : <MovieGallery movies={movieDemoObjects}/>}
     </div>
   );
 }

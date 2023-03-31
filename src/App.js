@@ -97,7 +97,7 @@ function App() {
       };
     } else {
       removeToken();
-      // navigate("/");
+      navigate("/");
     }
   }, [token]);
 

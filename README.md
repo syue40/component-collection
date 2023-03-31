@@ -12,9 +12,8 @@ A demo version of this applet is deployed on Azure! You can view it <a href="htt
 *@todo: create additional filters for browsing movies*\
 *@todo: add functions to add new movies, edit entries*\
 *@todo: create guest profile for demos*\
-*@todo: new forms and methods for writing to DB*\
 ~~*@todo: create user profile page*~~\
-*@todo: create password change menu for logged in users*
+~~*@todo: create password change menu for logged in users*~~
 
 <figure>
 <img src="https://i.ibb.co/H4V7F7M/deployment.png" alt="#">
