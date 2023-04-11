@@ -5,7 +5,6 @@ This repo has an Http Client which requests data from the ```component-collectio
 
 I added additional tables for user data to allow for sign-up/sign-in and resetting of lost passwords.
 
-
 ### Viewing the Applet
 A demo version of this applet is deployed on Azure! You can view it <a href="https://red-desert-0b2233c1e.2.azurestaticapps.net/">here</a>.
 
