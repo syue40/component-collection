@@ -6,6 +6,7 @@ import { signUpPost, loginPost } from "../utils/httpClient";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import Typography from "@mui/material/Typography";
 import "../styles/SignInSignUp.css";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -59,6 +60,7 @@ const Tab = ({ children }) => {
 
 const LoginForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   return (
     <div class="mt-5">
       <Formik
@@ -66,9 +68,10 @@ const LoginForm = (props) => {
         validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
+            setLoading(true);
             loginPost(values, props.setToken, props.navigate)
               .then((res) => {
-                console.log(res);
+                setLoading(false);
                 if (res.data.alert) {
                   setErrorMessage(res.data.alert);
                 }
@@ -112,12 +115,18 @@ const LoginForm = (props) => {
               </div>
               <div class="flex justify-center row-span-1">
                 <button
-                  class="border h-fit w-fit p-5 rounded-md"
+                  class="border p-5 rounded-md"
                   type="submit"
                   disabled={isSubmitting}
                   id="loginSubmitButton"
                 >
-                  Submit
+                 <span>
+                  {loading ? (
+                      <CircularProgress sx={{ display: "flex", height: "24px" }}color={"grey"} size="sm"/>
+                  ) : (
+                    <span> Submit</span>
+                  )}
+                </span>
                 </button>
               </div>
             </div>
